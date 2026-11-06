@@ -1,6 +1,6 @@
 # 05_Slide
 
-Slide thuyết trình 15 phút, tổng 8 đến 12 slide nội dung.
+Slide thuyết trình 15 phút, tổng 8 đến 12 slide nội dung, viết bằng tiếng Anh (kể cả speaker notes).
 
 | File | Người làm | Sinh ra từ prompt |
 |---|---|---|

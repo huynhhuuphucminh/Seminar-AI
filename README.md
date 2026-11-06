@@ -2,6 +2,7 @@
 
 Repo làm việc chung của nhóm 3 người cho seminar môn CS420 Nhập môn Trí tuệ nhân tạo.
 
+- **Ngôn ngữ:** báo cáo, slide, bảng và hình viết bằng **tiếng Anh**. Ghi chú nội bộ và nhật ký AI có thể viết tiếng Việt.
 - **Hạn nộp báo cáo:** 10/11/2026
 - **Thuyết trình:** dự kiến 11 đến 16/11/2026 (15 phút trình bày, khoảng 5 phút hỏi đáp)
 - **Kế hoạch, cách chấm điểm, phân công và bộ prompt:** xem file Google Docs "Seminar AI", tab **Tổng quan** và tab **Hệ thống AI và prompt**.
@@ -27,7 +28,7 @@ Mỗi thư mục có một file `README.md` ghi rõ cần nộp file gì, tên f
    - Thêm file: vào thư mục, bấm **Add file > Upload files**, kéo file vào, ghi nội dung commit rồi bấm **Commit changes**.
    - Sửa file văn bản: mở file, bấm biểu tượng bút chì, sửa rồi bấm **Commit changes**.
    - Nếu quen dùng, có thể dùng GitHub Desktop thay cho web.
-3. **Ghi chú và phần báo cáo viết bằng Markdown (`.md`)** để xem trực tiếp trên GitHub và dễ so sánh các phiên bản. Bản báo cáo cuối cùng (Word hoặc PDF) để trong `04_BaoCao/`.
+3. **Ghi chú và phần báo cáo viết bằng Markdown (`.md`)** để xem trực tiếp trên GitHub và dễ so sánh các phiên bản. Các file `BaoCao_*.md` viết bằng tiếng Anh vì sẽ ghép thẳng vào báo cáo. Bản báo cáo cuối cùng (Word hoặc PDF) để trong `04_BaoCao/`.
 4. **Nội dung commit ghi ngắn gọn việc vừa làm**, ví dụ: `TV2: thêm bảng mô phỏng vòng 0 và vòng 1`.
 5. **Không đưa mật khẩu, API key hay token lên repo.**
 
