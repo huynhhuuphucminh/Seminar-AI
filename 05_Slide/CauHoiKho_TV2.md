@@ -1,0 +1,14 @@
+# TV2 Q&A practice
+
+> Bản nháp do AI (Claude) soạn theo prompt 4.2. Tự trả lời to từng câu trước khi đọc câu trả lời mẫu; lần tập thứ hai, hỏi thêm câu của TV1 và TV3.
+
+1. **Why Sphere and Rastrigin?** Sphere has one smooth basin, so it shows convergence speed. Rastrigin has the same global minimum but a grid of local minima, so it shows whether the swarm gets trapped. Both are standard, cheap to evaluate and easy to plot in 2-D.
+2. **Why is the cognitive term zero in your worked examples?** At iteration 0 each pbest is set to the particle's own position, so pbest − x = 0. The term only acts once a particle has moved away from its best point.
+3. **Why use v(t+1) and not v(t) in the position update?** The velocity is updated first and the particle moves with the new velocity. This is the form in Algorithm 1 and Eq. 2 of Poli et al. (2007). Using the old velocity would ignore the attraction computed in the same step.
+4. **What happens at the boundary?** Each velocity component is clipped to [−2, 2] and the position is clipped to [−5.12, 5.12]. Poli et al. (2007, Sect. 7.2) note there is no agreed best way to handle particles leaving the space; clipping is the simplest choice.
+5. **Why 2,020 evaluations?** 20 particles are evaluated once at initialisation and once per iteration for 100 iterations: 20 + 20 × 100 = 2,020. The baselines get exactly the same number, so the comparison is fair in terms of cost.
+6. **Why do r₁ and r₂ change for every dimension?** That is the component-wise product in the standard formulation. Using one random number per particle would push all dimensions by the same fraction and restrict the directions the particle can move in.
+7. **Why does a smaller ω give a better result on Sphere but not on Rastrigin?** On Sphere there is only one basin, so strong damping (ω = 0.4) lets the swarm settle and refine quickly. On Rastrigin the same damping removed the momentum needed to leave a basin: one of five runs stopped near 0.995. ω = 0.7 kept enough motion to reach near-zero values in all five runs.
+8. **Your Rastrigin table shows 0 for some runs. Is that exact?** No. Rastrigin is computed as 20 minus a number close to 20, so values below about 10⁻¹³ are rounding error. We read them as "global minimum reached".
+9. **Are five seeds enough?** Enough to illustrate behaviour and to check reproducibility, not to claim significant differences. We report mean, standard deviation and the full range, and the conclusions are limited to these settings.
+10. **How do you know the code matches the formula?** The notebook recomputes the first update of all five particles by hand from the logged values and checks they match; it also reproduces the 1-D worked example and re-runs one combination to compare with the saved CSV.
