@@ -17,4 +17,5 @@
 | References | Thiếu ghi chú công cụ AI | Thêm mục "Use of AI tools" | Đã sửa |
 | Ký hiệu | ω, c₁, c₂, pbest, gbest thống nhất giữa các phần | Đã kiểm tra | Đã sửa |
 | Số liệu | Mọi con số trong Bảng 3.3, 4.1, 4.2, 4.3 | Đã tính lại từ `results_pso.csv`, `results_baseline.csv`, `swarm_states_sphere_seed42.csv` | Khớp |
+| Mục 3.2, 4.2, Abstract | Chưa giải thích vì sao v_max = 2.0 (chặt hơn quy tắc V_max = X_max của Poli et al., 2007) | Thêm lý do ở 3.2; chạy lại thí nghiệm ω với v_max = 5.12, 10.24, không giới hạn và nêu kết quả ở 4.2: thứ hạng trên Rastrigin phụ thuộc v_max | Đã sửa (theo góp ý soát báo cáo) |
 | Độ dài | 6–10 trang | Bản ghép 7 trang A4 (tính cả References) | Đạt |
