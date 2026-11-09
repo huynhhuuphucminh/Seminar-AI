@@ -29,6 +29,6 @@
 
 1. **Chốt ngôn ngữ nộp bài.** Đề S01 ghi "report in Vietnamese"; nhóm đang làm bằng tiếng Anh. Hỏi lại giảng viên.
 2. **Điền họ tên và MSSV** ở dòng tác giả của báo cáo (đang tô vàng) và slide 1.
-3. **TV3 xác nhận hai nguồn ngoài** Wang et al. (2019) và Gaing (2003) đã tự mở ra đọc; nếu chưa, bỏ hai nguồn này, phần ứng dụng vẫn đứng được nhờ Poli et al. (2007, Sect. 6).
+3. **Một thành viên xác nhận hai nguồn ngoài** Alshareef et al. (2019) và Phung & Ha (2021) đã tự mở ra đọc (hai bài đã được thêm vào thư mục làm việc và AI đã giúp đọc, nhưng người trong nhóm vẫn cần tự đọc lại); nếu chưa, bỏ hai nguồn này, phần ứng dụng vẫn đứng được nhờ Poli et al. (2007, Sect. 6).
 4. **Mỗi người đọc lại phần mình** và sửa câu chữ theo cách mình hiểu (đề yêu cầu giải thích bằng lời của mình).
 5. **Tập thuyết trình và hỏi đáp** theo `05_Slide/DanYSlide_*.md` và `CauHoiKho_*.md`.

@@ -75,4 +75,4 @@ Lấy từ Poli et al. (2007, Mục 6, tr. 50–51), không cần nguồn ngoài
 - **Neural networks** (training and design, which includes tuning a network's hyper-parameters): 26 papers (3.8%). Kennedy & Eberhart (1995) already trained neural-network weights with PSO (XOR, Iris).
 - **Electricity networks and load dispatching:** 48 papers (7.1%), the second-largest category.
 
-TV3 có thêm hai nguồn ngoài (Wang et al. 2019 cho tối ưu siêu tham số CNN, Gaing 2003 cho economic dispatch). Hai nguồn này hợp với danh mục trên, nhưng TV3 cần xác nhận đã tự mở ra đọc.
+Mục 4.4 của báo cáo dùng thêm hai nguồn ngoài: Alshareef et al. (2019) cho theo dõi điểm công suất cực đại của pin mặt trời, và Phung & Ha (2021) cho lập đường bay UAV. Theo cách phân loại của nhóm, hai nguồn này nằm trong nhóm điện/năng lượng và điều khiển/robot của danh mục trên (bài Poli không nhắc tới hai bài này). Một thành viên cần tự mở ra đọc lại.
