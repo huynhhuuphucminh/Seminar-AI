@@ -38,9 +38,9 @@ Four slides in about five minutes. Adjust slide numbers when merging into the te
 
 - Personal bests retain individual discoveries
 - The shared best focuses the search
-- Applications include CNN tuning and generator dispatch
+- Applications include solar power tracking and UAV path planning
 - Evidence comes from two 2-D benchmarks
 
-**Visual and credit.** Use a small crop of the diversity panel from Figure 4.3. Cite the team experiment below it. Cite Wang et al. (2019) and Gaing (2003) below the application examples. [Application references](../03_TV3_ThucNghiem/BaoCao_Results_Conclusion.md#references-to-merge-into-the-report)
+**Visual and credit.** Use a small crop of the diversity panel from Figure 4.3. Cite the team experiment below it. Cite Alshareef et al. (2019) and Phung and Ha (2021) below the application examples. [Application references](../03_TV3_ThucNghiem/BaoCao_Results_Conclusion.md#references-to-merge-into-the-report)
 
-**Speaker notes.** A particle can use what it found before and what the group has found. This can help the swarm refine a good answer quickly. When too many particles follow the same best and lose momentum, they may stop exploring other regions. Published studies apply PSO to tuning CNN hyperparameters and dispatching power generators. Those applications use different objectives and constraints. We tested only two functions in two dimensions. A follow-up could change the swarm size or one coefficient at a time, and test whether restarts help under the same budget.
+**Speaker notes.** A particle can use what it found before and what the group has found. This can help the swarm refine a good answer quickly. When too many particles follow the same best and lose momentum, they may stop exploring other regions. Published studies apply PSO to tracking the maximum power point of solar panels under partial shading and to planning UAV flight paths. Those applications use different objectives and constraints. We tested only two functions in two dimensions. A follow-up could change the swarm size or one coefficient at a time, and test whether restarts help under the same budget.

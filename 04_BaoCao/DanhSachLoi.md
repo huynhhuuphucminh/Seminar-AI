@@ -5,7 +5,7 @@
 | Vị trí | Vấn đề | Cách xử lý | Trạng thái |
 |---|---|---|---|
 | Dòng tác giả, slide 1 | Chưa có họ tên, MSSV | Điền vào chỗ tô vàng `[Member …]` | Chờ cả nhóm |
-| Toàn bài | Đề S01 ghi báo cáo bằng tiếng Việt, nhóm làm tiếng Anh | Hỏi giảng viên; nếu phải tiếng Việt thì dịch từ bản tiếng Anh | Chờ cả nhóm |
+| Toàn bài | Đề S01 ghi báo cáo bằng tiếng Việt, nhóm làm tiếng Anh | Giữ tiếng Anh theo README của nhóm (TV1 chốt ngày 09/11); nếu giảng viên yêu cầu tiếng Việt thì dịch từ bản tiếng Anh | Đã chốt tiếng Anh; nên xác nhận với giảng viên |
 | Mục 2 | Bảng ký hiệu có ở cả Background và Method | Chỉ giữ ở Method (Bảng 3.1) | Đã sửa |
 | Mục 3.2 | Phần Method gốc dài khoảng 1700 từ | Rút gọn danh sách bước, gộp hai bảng vòng 0 và vòng 1 thành Bảng 3.3 | Đã sửa |
 | Mục 3.4 | Bảng trạng thái tách 2 bảng | Gộp thành một bảng, thêm dòng gbest | Đã sửa |

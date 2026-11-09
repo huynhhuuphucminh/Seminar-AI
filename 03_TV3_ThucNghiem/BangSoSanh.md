@@ -2,7 +2,7 @@
 
 Each run used 2,020 objective evaluations on [−5.12, 5.12]² with seeds 0–4. PSO B used 20 particles, 100 updates and ω = 0.7. Random Search sampled uniformly. Hill Climbing used one uniform start and clipped Gaussian proposals (σ = 0.3 per coordinate), accepting only strict improvements, with no restarts.
 
-**Table 4.1. Final best-so-far fitness at 2,020 evaluations.** Lower is better. SD is the sample standard deviation across five seeds.
+**Table 4.1. Final best-so-far fitness at 2,020 evaluations.** Lower is better. SD is the sample standard deviation across five seeds. PSO B is the default configuration (ω = 0.7, c₁ = c₂ = 1.5).
 
 | Function | Method | Mean | SD | Best | Worst |
 |---|---|---:|---:|---:|---:|
@@ -13,7 +13,7 @@ Each run used 2,020 objective evaluations on [−5.12, 5.12]² with seeds 0–4.
 | Rastrigin | Random Search | 1.232e+00 | 8.268e−01 | 2.408e−01 | 2.484e+00 |
 | Rastrigin | Hill Climbing | 5.205e+00 | 4.557e+00 | 1.991e+00 | 1.304e+01 |
 
-**Table 4.2. Evaluations to first observed fitness strictly below 0.01.** Means include only runs that reached the threshold. PSO records the end of the first qualifying 20-evaluation batch. Baselines record every evaluation. “Not reached” means all five runs finished without hitting the threshold.
+**Table 4.2. Evaluations to first observed fitness strictly below 0.01.** PSO B is the default configuration (ω = 0.7, c₁ = c₂ = 1.5). Means include only runs that reached the threshold. PSO records the end of the first qualifying 20-evaluation batch. Baselines record every evaluation. “Not reached” means all five runs finished without hitting the threshold.
 
 | Function | Method | Mean evaluations among hits | Seeds reaching target |
 |---|---|---:|---:|
