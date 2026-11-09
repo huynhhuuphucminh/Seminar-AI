@@ -54,7 +54,7 @@ The assignment sheet writes the position update with v(t); we use the newly comp
    5. Set gbest to the best pbest_i.
 4. Return gbest and f(gbest).
 
-Velocity clamping follows the original PSO, in which each velocity component is kept within [−V_max, +V_max] (Poli et al., 2007, Sect. 2.2). Positions outside the domain are moved back to the nearest boundary. With N = 20 and T = 100, one run uses 20 + 20 × 100 = **2020 function evaluations**.
+Velocity clamping follows the original PSO, in which each velocity component is kept within [−V_max, +V_max] (Poli et al., 2007, Sect. 2.2). Positions outside the domain are moved back to the nearest boundary. We keep v_max = 2.0, about 20% of the domain width (10.24), as a safeguard in the spirit of the original PSO. Poli et al. (2007, Sects. 2.3–2.4) note that with an inertia weight or constriction, V_max can be removed or set to the dynamic range of each variable, so our limit is tighter than that rule. It was active in the worked example (Section 3.4), and its effect on the inertia sweep is checked in Section 4.2. With N = 20 and T = 100, one run uses 20 + 20 × 100 = **2020 function evaluations**.
 
 ## 3.3 Worked example 1: one update step in one dimension
 

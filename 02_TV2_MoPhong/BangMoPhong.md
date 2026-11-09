@@ -78,5 +78,6 @@ Từ notebook phần 3, file `results_pso.csv` (3030 dòng) và `summary_pso.csv
 Một số điểm TV3 nên đọc kỹ trước khi viết Results:
 - Với Rastrigin, cấu hình A (ω = 0.4) có seed 0 dừng ở 0.995, nghĩa là kẹt ở một cực tiểu địa phương cạnh gốc tọa độ; 4 seed còn lại về 0. Đây là một ví dụ có sẵn cho phần hội tụ sớm.
 - Với Sphere, ω nhỏ hội tụ nhanh nhất; với Rastrigin, ω = 0.7 cho kết quả ổn định nhất trong 3 cấu hình.
+- **Phụ thuộc v_max:** lần chạy ω = 0.4 bị kẹt chỉ xuất hiện khi v_max ≤ 5.12. Chạy lại với v_max = 10.24 (bằng độ rộng miền) hoặc không giới hạn thì cả 5 lần ω = 0.4 đều về 0, còn ω = 0.9 tệ hơn. Xem notebook phần 4 và `vmax_sensitivity.csv`.
 - Rastrigin được tính bằng phép trừ hai số gần 20, nên giá trị nhỏ hơn khoảng 1e-13 (kể cả 0) chỉ có nghĩa là "đã tới cực tiểu toàn cục".
 - Chỉ có 5 seed và 2 hàm 2 chiều, nên các nhận xét trên chỉ đúng trong thí nghiệm này.
