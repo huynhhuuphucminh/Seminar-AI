@@ -13,7 +13,7 @@ Report, slides, code and results for seminar topic **S01, Particle Swarm Optimiz
 | [`notebooks/`](notebooks) | `PSO_Seminar.ipynb` (PSO, worked examples, inertia sweep, `v_max` sensitivity) and `Baseline_SoSanh.ipynb` (comparison with Random Search and Hill Climbing, premature-convergence diagnostic) |
 | [`results/`](results) | CSV files written by the notebooks (every number in the report comes from here) |
 | [`figs/`](figs) | Figures written by the notebooks and used in the report and slides |
-| [`references/`](references) | The two source papers: Kennedy and Eberhart (1995), Poli, Kennedy and Blackwell (2007) |
+| [`references/`](references) | The two source papers (Kennedy and Eberhart 1995; Poli, Kennedy and Blackwell 2007) and the two application papers cited in Sect. 4.4 (Alshareef et al. 2019; Phung and Ha 2021) |
 | [`docs/`](docs) | Assignment sheet, reading notes, working drafts, review lists, slide outlines and the AI-use log (see [`docs/README.md`](docs/README.md)) |
 
 ## Main result in one paragraph
