@@ -8,3 +8,14 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.bbl
+*.blg

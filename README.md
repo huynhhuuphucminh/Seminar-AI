@@ -1,51 +1,43 @@
-# Seminar S01: Particle Swarm Optimization
+# PSO seminar (CS420, S01): how individual memory and social information balance exploration and exploitation
 
-Repo làm việc chung của nhóm 3 người cho seminar môn CS420 Nhập môn Trí tuệ nhân tạo.
+Report, slides, code and results for seminar topic **S01, Particle Swarm Optimization**, CS420 Introduction to Artificial Intelligence.
 
-- **Ngôn ngữ:** báo cáo, slide, bảng và hình viết bằng **tiếng Anh**. Ghi chú nội bộ và nhật ký AI có thể viết tiếng Việt.
-- **Hạn nộp báo cáo:** 10/11/2026
-- **Thuyết trình:** dự kiến 11 đến 16/11/2026 (15 phút trình bày, khoảng 5 phút hỏi đáp)
-- **Kế hoạch, cách chấm điểm, phân công và bộ prompt:** xem file Google Docs "Seminar AI", tab **Tổng quan** và tab **Hệ thống AI và prompt**.
+**Team:** Văn Tuấn Khải (24125032), Huỳnh Hữu Phúc Minh (24125068), Lê Lương Quốc Trung (24125084).
 
-## Cấu trúc thư mục
+## What is in this repository
 
-| Thư mục | Người phụ trách | Nội dung |
-|---|---|---|
-| [`00_TaiLieu/`](00_TaiLieu/) | Cả nhóm (chỉ đọc) | Đề bài S01, thông tin môn học, PDF bài báo |
-| [`01_TV1_LyThuyet/`](01_TV1_LyThuyet/) | Thành viên 1 | Ghi chú đọc bài báo, ví dụ tính tay, phần báo cáo của TV1 |
-| [`02_TV2_MoPhong/`](02_TV2_MoPhong/) | Thành viên 2 | Notebook PSO, `results_pso.csv`, bảng mô phỏng, phần Method |
-| [`03_TV3_ThucNghiem/`](03_TV3_ThucNghiem/) | Thành viên 3 | Notebook baseline và so sánh, `results_baseline.csv`, hình, phần Results |
-| [`04_BaoCao/`](04_BaoCao/) | Thành viên 1 ghép | Bản báo cáo hoàn chỉnh, danh sách lỗi, kết quả tự chấm |
-| [`05_Slide/`](05_Slide/) | Cả nhóm | Dàn ý slide của từng người, file slide cuối, câu hỏi khó |
-| [`NhatKyAI/`](NhatKyAI/) | Mỗi người một file | Ghi lại mỗi lần dùng AI (đề bắt buộc trích dẫn công cụ AI) |
+| Path | Content |
+|---|---|
+| [`Report.pdf`](Report.pdf), [`Report.tex`](Report.tex) | The report (English, LaTeX source and compiled PDF) |
+| [`slides/`](slides) | Presentation slides (`.pptx` and `.pdf`) |
+| [`notebooks/`](notebooks) | `PSO_Seminar.ipynb` (PSO, worked examples, inertia sweep, `v_max` sensitivity) and `Baseline_SoSanh.ipynb` (comparison with Random Search and Hill Climbing, premature-convergence diagnostic) |
+| [`results/`](results) | CSV files written by the notebooks (every number in the report comes from here) |
+| [`figs/`](figs) | Figures written by the notebooks and used in the report and slides |
+| [`references/`](references) | The two source papers: Kennedy and Eberhart (1995), Poli, Kennedy and Blackwell (2007) |
+| [`docs/`](docs) | Assignment sheet, reading notes, working drafts, review lists, slide outlines and the AI-use log (see [`docs/README.md`](docs/README.md)) |
 
-Mỗi thư mục có một file `README.md` ghi rõ cần nộp file gì, tên file là gì và sinh ra từ prompt nào.
+## Main result in one paragraph
 
-## Quy tắc dùng repo
+On two 2-D functions (Sphere and Rastrigin) and with an equal budget of 2,020 function evaluations, PSO with `ω = 0.7`, `c1 = c2 = 1.5` and `v_max = 10.24` (the domain width) reached the best final fitness (mean `1.0e-12` on Sphere and `1.1e-6` on Rastrigin) and was the only method to reach a fitness of 0.01 on Rastrigin; Hill Climbing reached 0.01 sooner on Sphere. With the inertia weight varied, `ω = 0.4` gave the best final mean on both functions, but with a tighter velocity limit (`v_max = 2.0`) one Rastrigin run stalled, so the ranking of inertia weights depends on that limit. A diagnostic run with a strong social pull and few particles collapsed onto a local minimum in all 20 seeds. The experiments are small (two functions, five seeds), so the report treats them as illustrations.
 
-1. **Mỗi người chỉ sửa file trong thư mục của mình** và file nhật ký của mình trong `NhatKyAI/`. Nhờ vậy cả nhóm commit thẳng lên nhánh `main` mà không bị xung đột.
-2. **Không cần biết git.** Dùng giao diện web của GitHub:
-   - Thêm file: vào thư mục, bấm **Add file > Upload files**, kéo file vào, ghi nội dung commit rồi bấm **Commit changes**.
-   - Sửa file văn bản: mở file, bấm biểu tượng bút chì, sửa rồi bấm **Commit changes**.
-   - Nếu quen dùng, có thể dùng GitHub Desktop thay cho web.
-3. **Ghi chú và phần báo cáo viết bằng Markdown (`.md`)** để xem trực tiếp trên GitHub và dễ so sánh các phiên bản. Các file `BaoCao_*.md` viết bằng tiếng Anh vì sẽ ghép thẳng vào báo cáo. Bản báo cáo cuối cùng (Word hoặc PDF) để trong `04_BaoCao/`.
-4. **Nội dung commit ghi ngắn gọn việc vừa làm**, ví dụ: `TV2: thêm bảng mô phỏng vòng 0 và vòng 1`.
-5. **Không đưa mật khẩu, API key hay token lên repo.**
+## How to reproduce
 
-## Chạy notebook bằng Google Colab
+Requirements: Python 3 with `numpy`, `pandas` and `matplotlib` (and Jupyter to open the notebooks).
 
-1. Mở [colab.research.google.com](https://colab.research.google.com), chọn **File > Open notebook > GitHub**.
-2. Tích **Include private repos**, cho phép Colab truy cập GitHub, chọn repo `Seminar-AI` và notebook cần mở.
-3. Chạy xong, lưu lại bằng **File > Save a copy in GitHub**, chọn đúng repo, nhánh `main` và đúng đường dẫn thư mục của mình.
-4. File kết quả (`.csv`, `.png`) do notebook tạo ra nằm trong phiên Colab: tải về từ bảng **Files** bên trái rồi upload vào đúng thư mục trên GitHub.
+1. Run `notebooks/PSO_Seminar.ipynb` from top to bottom. It writes `results/results_pso.csv`, `summary_pso.csv`, `swarm_states_sphere_seed42.csv`, `update_decomposition_iter0_to_1.csv`, `vmax_sensitivity.csv` and the figures `figs/fig_swarm_sphere.png`, `figs/fig_omega_*.png`.
+2. Run `notebooks/Baseline_SoSanh.ipynb` afterwards. It reads `results/results_pso.csv`, checks that it matches a replay of the same code, and writes `results/results_baseline.csv`, `diagnostic_sweep.csv`, `diagnostic_trace_seed0.csv` and `figs/fig_compare_*.png`, `figs/fig_local_optimum.png`.
+3. Open the notebooks from the repository root or from `notebooks/`; both work. In Colab, upload `results/results_pso.csv` before step 2.
 
-## Bàn giao giữa các thành viên
+All runs are determined by their random seeds (0 to 4 for the sweeps, 42 for the five-particle example, 0 to 19 for the diagnostic), so re-running reproduces the stored CSV files exactly.
 
-| Từ | Đến | Nội dung | Hạn |
-|---|---|---|---|
-| TV1 | TV2 | `01_TV1_LyThuyet/ViDuTinhTay.md` | 07/11 |
-| TV2 | TV3 | `02_TV2_MoPhong/PSO_Seminar.ipynb` và `results_pso.csv` | sáng 08/11 |
-| TV2, TV3 | TV1 | Phần báo cáo của mình (`BaoCao_*.md`), đã review | tối 08/11 |
-| TV1 | Cả nhóm | Bản ghép trong `04_BaoCao/` để chạy prompt 4.3 | 09/11 |
+To rebuild the report (needs a LaTeX distribution with `pdflatex`):
 
-Khi bàn giao, chỉ cần commit file lên đúng thư mục và nhắn cho người nhận.
+```bash
+pdflatex Report.tex
+pdflatex Report.tex
+pdflatex Report.tex
+```
+
+## Use of AI tools
+
+Claude (Anthropic) and OpenAI Codex were used to draft reading notes, implement and run the notebooks, and draft sections of the report and slides. The prompts and the checks made are recorded in [`docs/ai_log/`](docs/ai_log). Every number in the report was reproduced from the notebooks and files above.
