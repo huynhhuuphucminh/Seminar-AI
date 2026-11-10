@@ -10,7 +10,7 @@ Report, slides, code and results for seminar topic **S01, Particle Swarm Optimiz
 |---|---|
 | [`Report.pdf`](Report.pdf), [`Report.tex`](Report.tex) | The report (English, LaTeX source and compiled PDF) |
 | [`slides/`](slides) | Presentation slides (`.pptx` and `.pdf`) |
-| [`notebooks/`](notebooks) | `PSO_Seminar.ipynb` (PSO, worked examples, inertia sweep, `v_max` sensitivity) and `Baseline_SoSanh.ipynb` (comparison with Random Search and Hill Climbing, premature-convergence diagnostic) |
+| [`notebooks/`](notebooks) | `PSO_Seminar.ipynb` (PSO, worked examples, inertia sweep, `v_max` sensitivity) and `Baseline_Comparison.ipynb` (comparison with Random Search and Hill Climbing, premature-convergence diagnostic) |
 | [`results/`](results) | CSV files written by the notebooks (every number in the report comes from here) |
 | [`figs/`](figs) | Figures written by the notebooks and used in the report and slides |
 | [`references/`](references) | The two source papers: Kennedy and Eberhart (1995), Poli, Kennedy and Blackwell (2007) |
@@ -25,7 +25,7 @@ On two 2-D functions (Sphere and Rastrigin) and with an equal budget of 2,020 fu
 Requirements: Python 3 with `numpy`, `pandas` and `matplotlib` (and Jupyter to open the notebooks).
 
 1. Run `notebooks/PSO_Seminar.ipynb` from top to bottom. It writes `results/results_pso.csv`, `summary_pso.csv`, `swarm_states_sphere_seed42.csv`, `update_decomposition_iter0_to_1.csv`, `vmax_sensitivity.csv` and the figures `figs/fig_swarm_sphere.png`, `figs/fig_omega_*.png`.
-2. Run `notebooks/Baseline_SoSanh.ipynb` afterwards. It reads `results/results_pso.csv`, checks that it matches a replay of the same code, and writes `results/results_baseline.csv`, `diagnostic_sweep.csv`, `diagnostic_trace_seed0.csv` and `figs/fig_compare_*.png`, `figs/fig_local_optimum.png`.
+2. Run `notebooks/Baseline_Comparison.ipynb` afterwards. It reads `results/results_pso.csv`, checks that it matches a replay of the same code, and writes `results/results_baseline.csv`, `diagnostic_sweep.csv`, `diagnostic_trace_seed0.csv` and `figs/fig_compare_*.png`, `figs/fig_local_optimum.png`.
 3. Open the notebooks from the repository root or from `notebooks/`; both work. In Colab, upload `results/results_pso.csv` before step 2.
 
 All runs are determined by their random seeds (0 to 4 for the sweeps, 42 for the five-particle example, 0 to 19 for the diagnostic), so re-running reproduces the stored CSV files exactly.

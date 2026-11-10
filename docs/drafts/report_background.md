@@ -1,7 +1,7 @@
 <!--
-Trạng thái: bản nháp do AI (Claude) viết theo prompt 1.3, từ GhiChu_KennedyEberhart1995.md (đã đối chiếu với bản scan tr. 1942–1948)
-và GhiChu_Poli2007.md (đã đối chiếu với PDF trong 00_TaiLieu). TV1 cần đọc lại và viết lại bằng lời của mình.
-Bảng ký hiệu nằm ở phần Method (Bảng 3.1), nên phần này không lặp lại.
+Status: early draft written with AI assistance (prompt 1.3, see the AI-use log), from docs/notes/notes_Kennedy_Eberhart_1995.md
+(checked against the scanned paper, pp. 1942–1948) and docs/notes/notes_Poli_2007.md (checked against the PDF in references/).
+The symbol table is in the Method section, so it is not repeated here. The submitted report (Report.pdf) supersedes this draft.
 -->
 
 # 2. Background and Paper Review

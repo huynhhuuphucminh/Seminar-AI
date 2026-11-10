@@ -1,6 +1,6 @@
-# TV1 Q&A practice
+# Member 1 Q&A practice
 
-> Bản nháp do AI (Claude) soạn theo prompt 4.2. Tự trả lời to từng câu trước khi đọc câu trả lời mẫu; lần tập thứ hai, hỏi thêm câu của TV2 và TV3.
+> Written with AI assistance (prompt 4.2, see the AI-use log). Answer each question aloud before reading the model answer; in the second round, add the questions of Member 2 and Member 3. Numbers are from the first version (v_max = 2.0); use Report.pdf for the final values.
 
 1. **Where did the idea of PSO come from?** From simulations of bird flocks and fish schools. Kennedy and Eberhart cite Wilson's argument that each fish benefits from discoveries made by the whole school. They treated this sharing of information as the core hypothesis, then removed the parts that only made the simulation look realistic (Kennedy & Eberhart, 1995, pp. 1942–1945).
 2. **Why are both pbest and gbest needed?** The 1995 paper reports that both memories were necessary. pbest keeps each particle's own experience and keeps the swarm diverse; gbest spreads good information. If the pull towards gbest is much stronger, the flock rushes into local minima; if pbest dominates, particles wander. Roughly equal pulls worked best (p. 1945).

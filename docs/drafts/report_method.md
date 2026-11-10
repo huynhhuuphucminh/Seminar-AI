@@ -1,7 +1,7 @@
 <!--
-Trạng thái: bản nháp do AI (Claude) viết từ notebook PSO_Seminar.ipynb và bảng thông số chung.
-TV2 cần đọc lại, bấm máy lại ví dụ ở mục 3.3 và 3.4, và viết lại câu chữ theo cách của mình trước khi gửi TV1 ghép.
-Ví dụ 1 chiều ở mục 3.3 cần khớp với file 01_TV1_LyThuyet/ViDuTinhTay.md khi TV1 nộp.
+Status: early draft written with AI assistance from notebooks/PSO_Seminar.ipynb and the team's shared settings (see the AI-use log).
+Numbers are from the first version (v_max = 2.0); the submitted report (Report.pdf, v_max = 10.24) supersedes this draft.
+The 1-D example in Section 3.3 matches docs/notes/hand_worked_example_1d.md.
 -->
 
 # 3. Method and Worked Example
@@ -103,7 +103,7 @@ Two details matter when the step is checked by hand. First, particles 3, 4 and 5
 
 Over the five iterations, f(gbest) fell from 8.2615 to 3.3357, 0.1734, 0.1734, 0.1734 and finally 0.0195. Figure 3.1 shows the swarm contracting towards the optimum.
 
-> **Figure 3.1.** Positions of the five particles on the contour plot of the Sphere function at iterations 0, 1, 3 and 5 (seed 42). The star marks gbest and the cross marks the global minimum. *File: `02_TV2_MoPhong/figures/fig_swarm_sphere.png`.*
+> **Figure 3.1.** Positions of the five particles on the contour plot of the Sphere function at iterations 0, 1, 3 and 5 (seed 42). The star marks gbest and the cross marks the global minimum. *File: `figs/fig_swarm_sphere.png`.*
 
 ## 3.5 Experimental setup
 
@@ -111,7 +111,7 @@ To study the effect of the inertia weight, we compare three settings with c₁ =
 
 For the comparison with local search (Section 4), Random Search and Hill Climbing are given exactly the same budget of 2020 function evaluations per run and use the same seeds.
 
-All code is in the notebook `02_TV2_MoPhong/PSO_Seminar.ipynb` (Python, NumPy). Each run is fully determined by its seed; re-running any combination reproduces the stored results in `results_pso.csv`. With five seeds and two 2-D functions, the experiment illustrates the behaviour of PSO but does not support general claims about other problems.
+All code is in the notebook `notebooks/PSO_Seminar.ipynb` (Python, NumPy). Each run is fully determined by its seed; re-running any combination reproduces the stored results in `results_pso.csv`. With five seeds and two 2-D functions, the experiment illustrates the behaviour of PSO but does not support general claims about other problems.
 
 ## References used in this section
 

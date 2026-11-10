@@ -1,6 +1,6 @@
-# TV2 Q&A practice
+# Member 2 Q&A practice
 
-> Bản nháp do AI (Claude) soạn theo prompt 4.2. Tự trả lời to từng câu trước khi đọc câu trả lời mẫu; lần tập thứ hai, hỏi thêm câu của TV1 và TV3.
+> Written with AI assistance (prompt 4.2, see the AI-use log). Answer each question aloud before reading the model answer; in the second round, add the questions of Member 1 and Member 3. Numbers are from the first version (v_max = 2.0); use Report.pdf for the final values.
 
 1. **Why Sphere and Rastrigin?** Sphere has one smooth basin, so it shows convergence speed. Rastrigin has the same global minimum but a grid of local minima, so it shows whether the swarm gets trapped. Both are standard, cheap to evaluate and easy to plot in 2-D.
 2. **Why is the cognitive term zero in your worked examples?** At iteration 0 each pbest is set to the particle's own position, so pbest − x = 0. The term only acts once a particle has moved away from its best point.

@@ -1,8 +1,8 @@
-# TV2 presentation segment
+# Member 2 presentation segment
 
-> Bản nháp do AI (Claude) soạn theo prompt 4.1. TV2 tập nói theo speaker notes và bấm giờ; sửa lời cho tự nhiên với giọng của mình.
+> Written with AI assistance (prompt 4.1, see the AI-use log). Member 2 rehearses with the speaker notes, times the segment and adapts the wording. Numbers are from the first version (v_max = 2.0); the final deck is in slides/.
 
-Three content slides in about five minutes, after TV1.
+Three content slides in about five minutes, after Member 1.
 
 ## 1. Problem, functions and update rule · 1 min 30 s
 
@@ -36,6 +36,6 @@ Three content slides in about five minutes, after TV1.
 - f(gbest): 8.26 → 3.34 → 0.17 → 0.02 after 5 iterations
 - Inertia sweep: best ω depends on the function
 
-**Visual and credit.** `02_TV2_MoPhong/figures/fig_swarm_sphere.png` full width; a small inset of Table 3.4 (iteration 1). Credit: team experiment, Figure 3.1.
+**Visual and credit.** `figs/fig_swarm_sphere.png` full width; a small inset of Table 3.4 (iteration 1). Credit: team experiment, Figure 3.1.
 
 **Speaker notes.** Now the full algorithm with five particles on Sphere. At iteration 0 the particles are spread out and particle 1 is the best. After one update every particle improves, and particle 5 becomes the new global best. Three particles wanted to move faster than 2, so their velocity was clipped; this limit keeps the swarm from flying out of the domain. After five iterations the best value has dropped from 8.26 to 0.02, and the figure shows the swarm contracting around the origin. We then ran 20 particles with three inertia weights and five seeds each. The best setting was different on the two functions, and my teammate will now compare PSO with other methods under the same budget.

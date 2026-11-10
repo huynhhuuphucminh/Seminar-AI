@@ -1,9 +1,9 @@
-# Python và Jupyter
+# Python and Jupyter
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
 
-# File tạm của Office và hệ điều hành
+# Office and operating-system temporary files
 ~$*
 .DS_Store
 Thumbs.db
