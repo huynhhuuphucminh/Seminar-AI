@@ -41,7 +41,7 @@ Văn Tuấn Khải & Huỳnh Hữu Phúc Minh & Lê Lương Quốc Trung\\[1pt]
 \end{center}
 
 \begin{abstract}
-\noindent Particle Swarm Optimization (PSO) searches a continuous space with a population of particles that are pulled towards their own best positions and towards the best position found by the swarm. This report reviews the original algorithm of Kennedy and Eberhart~\cite{kennedy1995} and the later changes surveyed by Poli et al.~\cite{poli2007}, then studies how PSO balances exploration and exploitation on two 2-D benchmark functions, the unimodal Sphere and the multimodal Rastrigin. We give a step-by-step worked example, simulate five particles over five iterations, compare three inertia weights ($\omega=0.4,0.7,0.9$) over five seeds, and compare PSO with Random Search and Hill Climbing under an equal budget of 2,020 function evaluations. With $\omega=0.7$, PSO reached a mean final fitness of $1.8\times10^{-13}$ on Sphere and $2.1\times10^{-7}$ on Rastrigin, and it was the only method to reach a fitness of 0.01 on Rastrigin. A low inertia weight gave the lowest final fitness on Sphere but, under our velocity limit, left one Rastrigin run in a local minimum, and a diagnostic run with a strong social pull showed swarm diversity collapsing around a suboptimal basin. These small experiments illustrate rather than establish general behaviour.
+\noindent Particle Swarm Optimization (PSO) searches a continuous space with a population of particles that are pulled towards their own best positions and towards the best position found by the swarm. This report reviews the original algorithm of Kennedy and Eberhart~\cite{kennedy1995} and the later changes surveyed by Poli et al.~\cite{poli2007}, then studies how PSO balances exploration and exploitation on two 2-D benchmark functions, the unimodal Sphere and the multimodal Rastrigin. We give two worked examples, compare three inertia weights ($\omega=0.4,0.7,0.9$) over five seeds, and compare PSO with Random Search and Hill Climbing under an equal budget of 2,020 function evaluations. With $\omega=0.7$, PSO reached a mean final fitness of $1.0\times10^{-12}$ on Sphere and $1.1\times10^{-6}$ on Rastrigin, and it was the only method to reach a fitness of 0.01 on Rastrigin. The lowest inertia weight gave the best final fitness on both functions, but with a tighter velocity limit one Rastrigin run stalled in a local minimum, so the inertia ranking depends on that limit. A diagnostic run with a strong social pull showed swarm diversity collapsing around a suboptimal basin. These small experiments illustrate rather than establish general behaviour.
 \end{abstract}
 
 % ---------------- 1 ----------------
@@ -116,7 +116,7 @@ The three terms are inertia (keeps part of the previous motion), the cognitive t
 \textbf{Symbol} & \textbf{Meaning} & \textbf{Range or value used}\\
 \midrule
 $x_i(t)$ & Position of particle $i$, a candidate solution & $[-5.12,5.12]^2$\\
-$v_i(t)$ & Velocity of particle $i$ (step taken in one iteration) & each component in $[-2.0,2.0]$\\
+$v_i(t)$ & Velocity of particle $i$ (step taken in one iteration) & each component in $[-10.24,10.24]$\\
 $\pb_i$ & Best position found so far by particle $i$ & updated when $f$ improves\\
 $\gb$ & Best position found so far by the whole swarm & updated every iteration\\
 $\omega$ & Inertia weight: share of the previous velocity kept & 0.4, 0.7 (default), 0.9\\
@@ -124,7 +124,7 @@ $c_1,c_2$ & Cognitive and social acceleration coefficients & 1.5 and 1.5\\
 $r_1,r_2$ & Uniform random numbers, new for every particle, dimension and iteration & $U(0,1)$\\
 $\otimes$ & Component-wise multiplication & \\
 $N,T$ & Number of particles, number of iterations & 20 and 100 (5 and 5 in Section~\ref{sec:five})\\
-$\vmax$ & Velocity limit & 2.0\\
+$\vmax$ & Velocity limit & 10.24 (domain width)\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -137,7 +137,7 @@ The algorithm proceeds as follows:
 \item Return $\gb$ and $f(\gb)$.
 \end{enumerate}
 
-Velocity clamping follows the original PSO~\cite[Sect.~2.2]{poli2007}; positions outside the domain are moved to the nearest boundary. We keep $\vmax=2.0$, about 20\% of the domain width (10.24), as a safeguard in the spirit of the original PSO. Poli et al.~\cite[Sects.~2.3--2.4]{poli2007} note that with an inertia weight or constriction, $\Vmax$ can be removed or set to the dynamic range of each variable, so our limit is tighter than that rule. It was active in the worked example (Section~\ref{sec:five}), and its effect on the inertia sweep is checked in Section~\ref{sec:inertia}. All particles in one iteration use the \tn{gbest} of the previous iteration. With $N=20$ and $T=100$, one run uses $20+20\times100=\mathbf{2{,}020}$ function evaluations.
+Velocity clamping follows the original PSO~\cite[Sect.~2.2]{poli2007}; positions outside the domain are moved to the nearest boundary. We set $\vmax=10.24$, the domain width, following the rule $V_{\max}=X_{\max}$ that Poli et al.~\cite[Sects.~2.3--2.4]{poli2007} describe for PSOs with an inertia weight or constriction. A tighter limit ($\vmax=2.0$, about 20\% of the width) was used in an earlier version of our experiments; Section~\ref{sec:inertia} reports how it changes the results. All particles in one iteration use the \tn{gbest} of the previous iteration. With $N=20$ and $T=100$, one run uses $20+20\times100=\mathbf{2{,}020}$ function evaluations.
 
 \subsection{Worked example 1: one update step in one dimension}
 We take $f(x)=x^2$, $\omega=0.7$, $c_1=c_2=1.5$, two particles and fixed random numbers, with no velocity limit. At iteration 0 each \tn{pbest} equals the particle's own position, and $\gb=-2$ because $f(-2)=4<f(3)=9$.
@@ -164,25 +164,25 @@ We ran the full algorithm on the 2-D Sphere function with $N=5$, $T=5$, seed 42 
 
 \begin{table}[ht]
 \centering
-\caption{Particle states at iterations 0 and 1 (Sphere, seed 42). At iteration 0, $\pb_i=x_i$; at iteration 1, every particle improved, so $\pb_i=x_i$ again.}\label{tab:states}
+\caption{Particle states at iterations 0 and 1 (Sphere, seed 42). At iteration 0, $\pb_i=x_i$; at iteration 1, only particles 3 and 5 improved, so only their $\pb_i$ changed. Positions are clipped to the domain $[-5.12,5.12]^2$.}\label{tab:states}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lrrrrrrrrrr@{}}
 \toprule
 \textbf{Particle} & $x_1(0)$ & $x_2(0)$ & $v_1(0)$ & $v_2(0)$ & $f(0)$ & $x_1(1)$ & $x_2(1)$ & $v_1(1)$ & $v_2(1)$ & $f(1)$\\
 \midrule
-1 & 2.8053 & $-0.6259$ & $-0.5168$ & 1.7071 & 8.2615 & 2.4435 & 0.5691 & $-0.3618$ & 1.1949 & 6.2947\\
-2 & 3.6720 & 2.0210 & 0.5755 & 1.2910 & 17.5685 & 3.6513 & 1.4539 & $-0.0208$ & $-0.5671$ & 15.4455\\
-3 & $-4.1556$ & 4.8704 & $-0.2263$ & $-1.0910$ & 40.9897 & $-2.1556$ & 2.8704 & 2.0000 & $-2.0000$ & 12.8858\\
-4 & 2.6741 & 2.9293 & 0.2183 & $-1.7447$ & 15.7314 & 2.8525 & 0.9293 & 0.1784 & $-2.0000$ & 9.0003\\
-5 & $-3.8081$ & $-0.5080$ & 1.3105 & 0.5267 & 14.7599 & $-1.8081$ & $-0.2578$ & 2.0000 & 0.2503 & 3.3357\\
+1 & 2.8053 & $-0.6259$ & $-2.6461$ & 8.7401 & 8.2615 & 0.9531 & 5.1200 & $-1.8522$ & 6.1181 & 27.1227\\
+2 & 3.6720 & 2.0210 & 2.9464 & 6.6102 & 17.5685 & 5.1200 & 5.1200 & 1.6388 & 3.1562 & 52.4288\\
+3 & $-4.1556$ & 4.8704 & $-1.1589$ & $-5.5862$ & 40.9897 & $-0.0640$ & $-0.6020$ & 4.0916 & $-5.4724$ & 0.3665\\
+4 & 2.6741 & 2.9293 & 1.1179 & $-8.9330$ & 15.7314 & 3.4822 & $-5.1200$ & 0.8081 & $-8.7899$ & 38.3399\\
+5 & $-3.8081$ & $-0.5080$ & 6.7099 & 2.6965 & 14.7599 & 3.1398 & 1.2611 & 6.9479 & 1.7691 & 11.4486\\
 \midrule
-gbest & 2.8053 & $-0.6259$ & & & 8.2615 & $-1.8081$ & $-0.2578$ & & & 3.3357\\
+gbest & 2.8053 & $-0.6259$ & & & 8.2615 & $-0.0640$ & $-0.6020$ & & & 0.3665\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Particle 2, step by step.} The random numbers used were $r_1=(0.9707,0.8931)$ and $r_2=(0.3258,0.3705)$. In dimension 1, the inertia term is $0.7\times0.5755=0.4028$, the cognitive term is 0 and the social term is $1.5\times0.3258\times(2.8053-3.6720)=-0.4236$, so $v_1(1)=-0.0208$ and $x_1(1)=3.6513$. In dimension 2, inertia gives 0.9037 and the social term $1.5\times0.3705\times(-0.6259-2.0210)=-1.4709$, so $v_2(1)=-0.5671$ and $x_2(1)=1.4539$, with $f=15.4455$. Particles 3, 4 and 5 hit the velocity limit: particle 3 had a raw velocity of $(4.7444,-2.3258)$, clipped to $(2.0,-2.0)$. Over five iterations $f(\gb)$ fell from 8.2615 to 3.3357, 0.1734, 0.1734, 0.1734 and 0.0195 (Figure~\ref{fig:swarm}).
+\textbf{Particle 2, step by step.} The random numbers used were $r_1=(0.9707,0.8931)$ and $r_2=(0.3258,0.3705)$. In dimension 1, the inertia term is $0.7\times2.9464=2.0625$, the cognitive term is 0 and the social term is $1.5\times0.3258\times(2.8053-3.6720)=-0.4236$, so $v_1(1)=1.6388$ and $x_1=3.6720+1.6388=5.3108$, which is moved to the boundary 5.12. In dimension 2, inertia gives $0.7\times6.6102=4.6271$ and the social term is $1.5\times0.3705\times(-0.6259-2.0210)=-1.4709$, so $v_2(1)=3.1562$ and $x_2=5.1772$, again moved to 5.12; the new fitness is $f=52.4288$, worse than before. No velocity reached the limit, but particles 1, 2 and 4 were moved to the boundary in at least one coordinate at iteration 1, because the initial velocities are drawn from $[-10.24,10.24]$. Over five iterations $f(\gb)$ fell from 8.2615 to 0.3665 at iteration 1 (particle 3) and did not improve afterwards (Figure~\ref{fig:swarm}).
 
 \begin{figure}[ht]
 \centering
@@ -205,10 +205,10 @@ To study the inertia weight we compare \textbf{A} ($\omega=0.4$), \textbf{B} ($\
 \toprule
 \textbf{Function} & \textbf{Method} & \textbf{Mean} & \textbf{SD} & \textbf{Best} & \textbf{Worst}\\
 \midrule
-Sphere & PSO ($\omega=0.7$) & 1.795e$-$13 & 1.843e$-$13 & 4.595e$-$14 & 4.616e$-$13\\
+Sphere & PSO ($\omega=0.7$) & 1.004e$-$12 & 1.250e$-$12 & 1.502e$-$15 & 2.433e$-$12\\
 Sphere & Random Search & 1.397e$-$02 & 1.605e$-$02 & 1.216e$-$03 & 4.154e$-$02\\
 Sphere & Hill Climbing & 2.602e$-$04 & 2.883e$-$04 & 4.341e$-$05 & 6.466e$-$04\\
-Rastrigin & PSO ($\omega=0.7$) & 2.077e$-$07 & 4.565e$-$07 & 5.684e$-$14 & 1.024e$-$06\\
+Rastrigin & PSO ($\omega=0.7$) & 1.070e$-$06 & 2.345e$-$06 & 1.595e$-$11 & 5.264e$-$06\\
 Rastrigin & Random Search & 1.232e+00 & 8.268e$-$01 & 2.408e$-$01 & 2.484e+00\\
 Rastrigin & Hill Climbing & 5.205e+00 & 4.557e+00 & 1.991e+00 & 1.304e+01\\
 \bottomrule
@@ -223,47 +223,66 @@ Rastrigin & Hill Climbing & 5.205e+00 & 4.557e+00 & 1.991e+00 & 1.304e+01\\
 \toprule
 \textbf{Function} & \textbf{Method} & \textbf{Mean evaluations} & \textbf{Seeds reaching 0.01}\\
 \midrule
-Sphere & PSO ($\omega=0.7$) & 132.0 & 5/5\\
+Sphere & PSO ($\omega=0.7$) & 216.0 & 5/5\\
 Sphere & Random Search & 659.0 & 3/5\\
 Sphere & Hill Climbing & 42.6 & 5/5\\
-Rastrigin & PSO ($\omega=0.7$) & 784.0 & 5/5\\
+Rastrigin & PSO ($\omega=0.7$) & 1004.0 & 5/5\\
 Rastrigin & Random Search & not reached & 0/5\\
 Rastrigin & Hill Climbing & not reached & 0/5\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-On Sphere, Hill Climbing reached 0.01 in all five runs after a mean of 42.6 evaluations, compared with 132.0 for PSO (Table~\ref{tab:hits}). Its progress then slowed, while PSO kept improving (Figure~\ref{fig:compare}) and finished with a mean of $1.795\times10^{-13}$, against $2.602\times10^{-4}$ for Hill Climbing and $1.397\times10^{-2}$ for Random Search (Table~\ref{tab:final}). A single local search gave rapid initial progress on the smooth objective; PSO was stronger when the goal was final accuracy under this budget.
+On Sphere, Hill Climbing reached 0.01 in all five runs after a mean of 42.6 evaluations, compared with 216.0 for PSO (Table~\ref{tab:hits}). Its progress then slowed, while PSO kept improving (Figure~\ref{fig:compare}) and finished with a mean of $1.004\times10^{-12}$, against $2.602\times10^{-4}$ for Hill Climbing and $1.397\times10^{-2}$ for Random Search (Table~\ref{tab:final}). A single local search gave rapid initial progress on the smooth objective; PSO was stronger when the goal was final accuracy under this budget.
 
-On Rastrigin, PSO reached 0.01 in all five runs after 784 evaluations on average, and neither baseline reached it. Random Search finished ahead of Hill Climbing (means 1.232 and 5.205), while PSO averaged $2.077\times10^{-7}$. Uniform sampling kept trying points in different basins, whereas the single-start Hill Climbing, which accepts only improvements with a fixed step scale, rarely left the basin it reached first. The comparison measures fitness against evaluations; runtime was outside the scope of the experiment.
+On Rastrigin, PSO reached 0.01 in all five runs after 1,004 evaluations on average, and neither baseline reached it. Random Search finished ahead of Hill Climbing (means 1.232 and 5.205), while PSO averaged $1.070\times10^{-6}$. Uniform sampling kept trying points in different basins, whereas the single-start Hill Climbing, which accepts only improvements with a fixed step scale, rarely left the basin it reached first. The comparison measures fitness against evaluations; runtime was outside the scope of the experiment.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=\linewidth]{fig_compare.png}
+\includegraphics[width=0.49\linewidth]{fig_compare_sphere.png}\hfill
+\includegraphics[width=0.49\linewidth]{fig_compare_rastrigin.png}
 \caption{Best-so-far fitness against function evaluations on Sphere (left) and Rastrigin (right): mean and min--max range over five seeds. The Rastrigin plot uses a display floor of $10^{-13}$. For PSO, 20 evaluations correspond to one iteration (iteration $k$ at $20\times(k+1)$ evaluations, so 2,020 evaluations is iteration 100); Random Search and Hill Climbing have no iterations, so evaluations are the common axis. Source: team experiments.}\label{fig:compare}
 \end{figure}
 
 \subsection{Sensitivity to the inertia weight}\label{sec:inertia}
 \begin{table}[ht]
 \centering
-\caption{Mean final PSO fitness for three inertia weights (five seeds, 2,020 evaluations, $c_1=c_2=1.5$).}\label{tab:omega}
+\caption{Mean final PSO fitness for three inertia weights (five seeds, 2,020 evaluations, $c_1=c_2=1.5$, $\vmax=10.24$).}\label{tab:omega}
 \small
 \begin{tabular}{@{}lrrr@{}}
 \toprule
 \textbf{Function} & \textbf{A ($\omega=0.4$)} & \textbf{B ($\omega=0.7$)} & \textbf{C ($\omega=0.9$)}\\
 \midrule
-Sphere & 5.455e$-$31 & 1.795e$-$13 & 4.158e$-$05\\
-Rastrigin & 1.990e$-$01 & 2.077e$-$07 & 8.452e$-$03\\
+Sphere & 8.813e$-$30 & 1.004e$-$12 & 3.598e$-$04\\
+Rastrigin & 0 & 1.070e$-$06 & 1.644e$-$01\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The lowest inertia gave the best final mean on Sphere, while the middle setting gave the best mean on Rastrigin (Table~\ref{tab:omega}). On Sphere there is only one basin, so strong damping lets the swarm settle and refine quickly; with $\omega=0.9$ the swarm was still converging when the budget ran out (mean $4.2\times10^{-5}$). On Rastrigin, four runs with $\omega=0.4$ reached values below $10^{-6}$, but the fifth stopped near 0.995, a local minimum next to the origin, and this single run dominates the mean. This matches the interpretation of $1-\omega$ as friction in Poli et al.~\cite{poli2007}: low $\omega$ favours exploitation, which pays off on a unimodal function and becomes risky on a multimodal one. Only $\omega$ was varied, so the sweep shows sensitivity to $\omega$ under these settings; ranking the effects of $c_1$ and $c_2$ would need a separate controlled sweep.
+The lowest inertia gave the best final mean on both functions, and the ranking A $<$ B $<$ C held on Sphere and on Rastrigin (Table~\ref{tab:omega}). On Sphere there is only one basin, so strong damping lets the swarm settle and refine quickly; with $\omega=0.9$ the swarm was still converging when the budget ran out (mean $3.6\times10^{-4}$). On Rastrigin, all five runs with $\omega=0.4$ reached the global minimum (values at floating-point resolution), $\omega=0.7$ averaged $1.1\times10^{-6}$, and $\omega=0.9$ ended at a mean of 0.164, dominated by one run at 0.67 (the other four were below 0.07). This matches the interpretation of $1-\omega$ as friction in Poli et al.~\cite{poli2007}: low $\omega$ slows the particles and favours exploitation, which paid off on both landscapes within 100 iterations, whereas $\omega=0.9$ kept them moving too much for this budget. Only $\omega$ was varied, so the sweep shows sensitivity to $\omega$ under these settings; ranking the effects of $c_1$ and $c_2$ would need a separate controlled sweep.
 
-Because our velocity limit is tighter than the rule in Poli et al.~\cite{poli2007}, we repeated the sweep with $\vmax=5.12$, $10.24$ (the domain width) and no clamp. On Sphere the ranking A $<$ B $<$ C held for every limit. On Rastrigin, $\omega=0.7$ ended near zero in every setting (mean at most $1.1\times10^{-6}$), but the stalled $\omega=0.4$ run occurred only with $\vmax\le5.12$: with $\vmax=10.24$ or no clamp, all five $\omega=0.4$ runs reached the global minimum, while $\omega=0.9$ became worse (means 0.16 and 0.067). The advantage of $\omega=0.7$ over $\omega=0.4$ on Rastrigin therefore depends on the velocity limit.
+Our velocity limit $\vmax=10.24$ equals the domain width, the rule $V_{\max}=X_{\max}$ discussed in~\cite[Sects.~2.3--2.4]{poli2007}. An earlier version of our experiments used the tighter limit $\vmax=2.0$, about 20\% of the domain width, so we repeated the sweep with $\vmax=2.0$, 5.12 and with no clamp (Table~\ref{tab:vmax}; with no clamp, initial velocities are still drawn from $\pm10.24$). On Sphere the ranking A $<$ B $<$ C held for every limit. On Rastrigin, $\omega=0.7$ ended near zero in every setting (mean at most $1.1\times10^{-6}$), but with $\vmax\le5.12$ one of the five $\omega=0.4$ runs stalled near 0.995, which made $\omega=0.7$ the best setting there; with $\vmax=10.24$ or no clamp all five $\omega=0.4$ runs reached the global minimum. The ranking of $\omega$ on Rastrigin therefore depends on the velocity limit.
+
+\begin{table}[ht]
+\centering
+\caption{Mean final PSO fitness by velocity limit (five seeds, 2,020 evaluations, $c_1=c_2=1.5$). The default is $\vmax=10.24$; ``none'' means no clamp.}\label{tab:vmax}
+\small
+\begin{tabular}{@{}lcrrrr@{}}
+\toprule
+\textbf{Function} & $\omega$ & $\vmax=2.0$ & $5.12$ & $10.24$ (default) & none\\
+\midrule
+Sphere & 0.4 & 5.455e$-$31 & 2.917e$-$30 & 8.813e$-$30 & 8.813e$-$30\\
+Sphere & 0.7 & 1.795e$-$13 & 5.781e$-$13 & 1.004e$-$12 & 1.265e$-$12\\
+Sphere & 0.9 & 4.158e$-$05 & 1.151e$-$04 & 3.598e$-$04 & 3.270e$-$04\\
+Rastrigin & 0.4 & 1.990e$-$01 & 1.990e$-$01 & 0 & 0\\
+Rastrigin & 0.7 & 2.077e$-$07 & 1.963e$-$08 & 1.070e$-$06 & 9.626e$-$09\\
+Rastrigin & 0.9 & 8.452e$-$03 & 4.430e$-$02 & 1.644e$-$01 & 6.735e$-$02\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{Premature convergence}
-In a separate Rastrigin diagnostic we ran five particles with $\omega=0.4$, $c_1=0.5$ and $c_2=2.5$ for 100 iterations over seeds 0 to 19. Seed 0 was the first to finish above 0.9. It ended at a verified local minimum near $(-0.994959,\,0.994959)$ with fitness 1.989918, while the global value is 0. The mean distance of the particles to the swarm centroid fell from 4.184 to $7.85\times10^{-10}$, so the swarm had collapsed onto one point. The default run with the same seed kept a final mean distance of 0.0918 and found a point with fitness $1.408\times10^{-8}$ (Figure~\ref{fig:trap}).
+In a separate Rastrigin diagnostic we ran five particles with $\omega=0.4$, $c_1=0.5$ and $c_2=2.5$ for 100 iterations over seeds 0 to 19. All 20 runs finished above 0.9 (the smallest final fitness was 0.995). Seed 0, the first, ended at a verified local minimum near $(0,\,-0.994959)$ with fitness 0.994959, while the global value is 0. The mean distance of the particles to the swarm centroid fell from 4.184 to $3.01\times10^{-9}$, so the swarm had collapsed onto one point. The default run with the same seed kept a final mean distance of 0.0552 and found a point with fitness $1.570\times10^{-8}$ (Figure~\ref{fig:trap}).
 
 A strong pull towards \tn{gbest}, weak momentum and a small population are plausible contributors to this rapid loss of diversity. This mirrors the 1995 observation that a relatively high \texttt{g\_increment} makes the flock rush prematurely towards local minima. The diagnostic changes several settings at once and uses 505 evaluations against 2,020 for the default run, so it shows how a swarm can converge tightly around a suboptimal basin without measuring how much each parameter contributed.
 
@@ -285,9 +304,9 @@ A strong pull towards \tn{gbest}, weak momentum and a small population are plaus
 \subsection{Limitations}\label{sec:limitations}
 The results should be read within the following limits.
 \begin{itemize}
-\item \textbf{Small experiments.} We used two functions in two dimensions and five seeds per setting, without confidence intervals. Means can be dominated by a single run (the stalled $\omega=0.4$ run on Rastrigin), and differences between values near zero, such as $10^{-30}$ and $10^{-12}$, have no practical meaning.
+\item \textbf{Small experiments.} We used two functions in two dimensions and five seeds per setting, without confidence intervals. Means can be dominated by a single run (for example one $\omega=0.9$ run on Rastrigin ended at 0.67 while the other four were below 0.07), and differences between values near zero, such as $10^{-30}$ and $10^{-12}$, have no practical meaning.
 \item \textbf{Optimum at the centre.} Both functions have their global minimum at the centre of the domain, and Poli et al.~\cite[Sect.~7.1]{poli2007} mention a possible bias of PSO towards optima near the origin, so shifted versions of the functions would be a fairer test.
-\item \textbf{Velocity limit.} The limit $\vmax=2.0$ is tighter than the rule in~\cite{poli2007}, and the ranking of $\omega$ on Rastrigin depends on it (Section~\ref{sec:inertia}). The comparison with the baselines uses $\omega=0.7$ under the same limit.
+\item \textbf{Velocity limit.} We use $\vmax=10.24$, the domain width. With the tighter limit $\vmax=2.0$ of an earlier version, one $\omega=0.4$ run on Rastrigin stalled and the ranking of $\omega$ changed (Section~\ref{sec:inertia}), so conclusions about $\omega$ are tied to this limit. The comparison with the baselines uses $\omega=0.7$ under the same limit.
 \item \textbf{Baselines, topology and cost measure.} Hill Climbing uses a single step scale ($\sigma=0.3$) and no restarts; random-restart Hill Climbing would be a stronger baseline. We used a single topology (\tn{gbest}), varied only $\omega$ in the main sweep, and measured cost in function evaluations rather than run time.
 \item \textbf{Diagnostic and applications.} The premature-convergence diagnostic changes several settings at once and uses fewer evaluations than the default run, so it cannot attribute the collapse to one parameter. The two applications are reported by their authors under their own settings and use PSO variants, so our results do not establish the same ranking for them.
 \end{itemize}
@@ -295,7 +314,7 @@ The results therefore illustrate PSO's behaviour; they do not establish general 
 
 % ---------------- 5 ----------------
 \section{Conclusion}\label{sec:conclusion}
-PSO balances exploration and exploitation through what each particle remembers and what the swarm shares. Personal bests keep information from each particle's own search and maintain diversity; the global best lets the swarm refine a promising region together; and the inertia weight decides how much motion carries the particles past the memories they are attracted to. In our benchmarks the default setting ($\omega=0.7$, $c_1=c_2=1.5$) used this balance to finish with a much better mean fitness than Random Search and Hill Climbing under the same budget. When the balance tilts towards exploitation, through low inertia, a strong social pull or few particles, the swarm can collapse onto a suboptimal basin, as our Rastrigin diagnostic showed. A controlled follow-up could vary the population size and the acceleration coefficients one at a time under a fixed budget, use shifted and higher-dimensional functions, and compare the \tn{gbest} topology with an \tn{lbest} ring or diversity-triggered restarts.
+PSO balances exploration and exploitation through what each particle remembers and what the swarm shares. Personal bests keep information from each particle's own search and maintain diversity; the global best lets the swarm refine a promising region together; and the inertia weight decides how much motion carries the particles past the memories they are attracted to. In our benchmarks the default setting ($\omega=0.7$, $c_1=c_2=1.5$) used this balance to finish with a much better mean fitness than Random Search and Hill Climbing under the same budget. When the balance tilts towards exploitation, through a strong social pull, low inertia and few particles together, the swarm can collapse onto a suboptimal basin, as our Rastrigin diagnostic showed. A controlled follow-up could vary the population size and the acceleration coefficients one at a time under a fixed budget, use shifted and higher-dimensional functions, and compare the \tn{gbest} topology with an \tn{lbest} ring or diversity-triggered restarts.
 
 % ---------------- references ----------------
 \begin{thebibliography}{9}\small
