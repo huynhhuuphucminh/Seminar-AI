@@ -62,7 +62,7 @@ Minh will now show it with real numbers.
 
 Thank you. Before the experiments, let us apply the rule once by hand, in one dimension, with f of x equals x squared.
 
-`[click]` Particle 1 is at 3, particle 2 at minus 2. f is 9 and 4, so particle 2 is the global best. At the start, each personal best is the current position, so the cognitive term is zero.
+`[click]` Particle 1 is at 3, particle 2 at minus 2. Fitness is f of x: 3 squared is 9, minus 2 squared is 4, so particle 2 is the global best. At the start, each personal best is the current position, so the cognitive term is zero.
 
 ### Slide 6b. One step by hand: iteration 0 to 1
 
@@ -155,8 +155,8 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 | Người | Slide | Số từ | Nhanh | Chậm | Ước tính thật |
 |---|---|---|---|---|---|
 | TV1 | 0–5 | 549 | 4:13 | 4:59 | khoảng 5:59 |
-| TV2 | 6–8 | 403 | 3:06 | 3:40 | khoảng 4:24 |
+| TV2 | 6–8 | 412 | 3:10 | 3:45 | khoảng 4:30 |
 | TV3 | 9–12 | 415 | 3:12 | 3:46 | khoảng 4:32 |
-| **Tổng** | | **1,367** | **10:31** | **12:26** | **khoảng 14:55** |
+| **Tổng** | | **1,376** | **10:35** | **12:31** | **khoảng 15:01** |
 
 Script đã được rút gọn để vừa 15 phút. Nếu bấm giờ thật vẫn quá, cắt tiếp theo thứ tự: cụm "like the red dot on slide 1" ở slide 10.

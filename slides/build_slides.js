@@ -239,14 +239,14 @@ notes(s, 5);
 // ===================== Slide 6: one step by hand, iteration 0 =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "One step by hand: iteration 0", "Member 2");
-T(s, "f(x) = x²,  one dimension,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit", { x: 0.5, y: 1.05, w: 9.0, h: 0.35, fontSize: 15, fontFace: HEAD });
-const rows6a = [["Particle", "x(0)", "v(0)", "r₁", "r₂", "f(x(0))", "pbest"],
-  ["P1", "3", "0.5", "0.4", "0.6", "9", "3"],
-  ["P2", "−2", "−0.5", "0.8", "0.3", "4  ★ gbest", "−2"]];
+T(s, [{ text: "Fitness = f(x) = x²", options: { bold: true, color: TEAL } }, { text: " (lower is better),  one dimension,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit" }], { x: 0.5, y: 1.05, w: 9.0, h: 0.35, fontSize: 15, fontFace: HEAD });
+const rows6a = [["Particle", "x(0)", "v(0)", "r₁", "r₂", "f(x(0)) = x(0)²", "pbest"],
+  ["P1", "3", "0.5", "0.4", "0.6", "3² = 9", "3"],
+  ["P2", "−2", "−0.5", "0.8", "0.3", "(−2)² = 4  ★ gbest", "−2"]];
 s.addTable(rows6a.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || j === 0 || (i === 2 && j === 5), color: i === 0 ? WHITE : (i === 2 && j === 5 ? ORANGE : NAVY),
   fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
-  { x: 0.5, y: 1.55, w: 9.0, colW: [1.2, 1.1, 1.1, 1.0, 1.0, 1.9, 1.7], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
+  { x: 0.5, y: 1.55, w: 9.0, colW: [1.1, 1.0, 1.0, 0.9, 0.9, 2.6, 1.5], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
 {
   const X0 = 4.69, U = 1.2333, xl = (v) => X0 + v * U, LY = 3.55;
   s.addShape(pres.shapes.LINE, { x: 1.0, y: LY, w: 8.0, h: 0, line: { color: GREY, width: 1.25 } });
@@ -284,6 +284,7 @@ s.addTable(rows7.map((r, i) => r.map((c, j) => ({ text: c, options: {
   { x: 0.5, y: 1.1, w: 5.9, colW: [2.1, 1.9, 1.9], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
 {
   const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.6;
+  T(s, [{ text: "Fitness = f(x) = x²", options: { bold: true, color: TEAL } }, { text: ", lower is better" }], { x: 6.6, y: 1.15, w: 2.9, h: 0.3, fontSize: 12.5, fontFace: HEAD });
   s.addShape(pres.shapes.LINE, { x: 6.6, y: LY, w: 2.9, h: 0, line: { color: GREY, width: 1.25 } });
   [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
     s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.05, w: 0, h: 0.1, line: { color: GREY, width: 1 } });
@@ -345,7 +346,7 @@ s.addTable(rows8.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || c.includes("★"), color: i === 0 ? WHITE : (j === 4 && i > 0 ? (better[i] ? TEAL : RED) : NAVY),
   fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 12.5, fontFace: BODY, align: "center", valign: "middle" } }))),
   { x: 4.4, y: 1.05, w: 5.1, colW: [0.4, 1.35, 0.75, 1.5, 1.1], rowH: 0.34, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.03 });
-T(s, "Sphere, seed 42, ω = 0.7, c₁ = c₂ = 1.5.  ★ = gbest", { x: 4.4, y: 3.15, w: 5.1, h: 0.28, fontSize: 11, italic: true, color: GREY });
+T(s, "Sphere, f(x) = x₁² + x₂², seed 42, ω = 0.7, c₁ = c₂ = 1.5.  ★ = gbest", { x: 4.4, y: 3.15, w: 5.1, h: 0.28, fontSize: 11, italic: true, color: GREY });
 [["8.26 → 0.37", "gbest after one step"], ["2 of 5", "particles improve"]].forEach(([big, small], i) => {
   T(s, big, { x: 4.4 + i * 2.6, y: 3.5, w: 2.5, h: 0.5, fontFace: HEAD, fontSize: 24, bold: true, color: i ? RED : TEAL });
   T(s, small, { x: 4.4 + i * 2.6, y: 3.98, w: 2.5, h: 0.28, fontSize: 12, color: DK2 });
