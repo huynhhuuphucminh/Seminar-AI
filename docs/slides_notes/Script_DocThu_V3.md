@@ -116,7 +116,7 @@ Next, PSO against Random Search and Hill Climbing, all with 2,020 evaluations. T
 
 `[click]` On Sphere, Hill Climbing reaches 0.01 first, after about 43 evaluations; PSO needs about 216, because each step costs 20 evaluations. But PSO keeps improving and finishes far lower.
 
-`[click]` On Rastrigin, all five PSO runs reach 0.01, and not one baseline run does. Hill Climbing stays at the first local minimum it finds, like the red dot on slide 1.
+`[click]` On Rastrigin, all five PSO runs reach 0.01, and not one baseline run does. Hill Climbing stays at the first local minimum it finds.
 
 So the winner depends on the landscape, and on whether we need early speed or final accuracy.
 
@@ -156,7 +156,7 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 |---|---|---|---|---|---|
 | TV1 | 0–5 | 549 | 4:13 | 4:59 | khoảng 5:59 |
 | TV2 | 6–8 | 412 | 3:10 | 3:45 | khoảng 4:30 |
-| TV3 | 9–12 | 415 | 3:12 | 3:46 | khoảng 4:32 |
-| **Tổng** | | **1,376** | **10:35** | **12:31** | **khoảng 15:01** |
+| TV3 | 9–12 | 408 | 3:08 | 3:43 | khoảng 4:27 |
+| **Tổng** | | **1,369** | **10:32** | **12:27** | **khoảng 14:56** |
 
-Script đã được rút gọn để vừa 15 phút. Nếu bấm giờ thật vẫn quá, cắt tiếp theo thứ tự: cụm "like the red dot on slide 1" ở slide 10.
+Script đã được rút gọn để vừa 15 phút và đã dùng hết các câu cắt dự phòng. Nếu bấm giờ thật vẫn quá, nói nhanh hơn ở slide 7–8 (tính tay) vì số đã có trên slide, không cần đọc từng phép nhân.
