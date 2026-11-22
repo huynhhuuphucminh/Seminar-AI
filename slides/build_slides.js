@@ -22,9 +22,9 @@ const HEAD = "Cambria", BODY = "Calibri", MONO = "Courier New";
 const script = fs.readFileSync(path.join(ROOT, "docs", "slides_notes", "Script_DocThu_V3.md"), "utf8")
   .split("## Thời gian ước tính")[0];
 const NOTES = {};
-script.split(/^### Slide (\d+)\.[^\n]*$/m).forEach((chunk, i, arr) => {
+script.split(/^### Slide (\d+[a-z]?)\.[^\n]*$/m).forEach((chunk, i, arr) => {
   if (i % 2 === 1) {
-    NOTES[+chunk] = arr[i + 1].replace(/`\[click\]`\s*/g, "").replace(/^##.*$/gm, "").replace(/^---$/gm, "")
+    NOTES[chunk] = arr[i + 1].replace(/`\[click\]`\s*/g, "").replace(/^##.*$/gm, "").replace(/^---$/gm, "")
       .replace(/\n{3,}/g, "\n\n").trim();
   }
 });
@@ -236,10 +236,40 @@ T(s, [{ text: "Large ω explores, small ω refines\n", options: { bold: true, co
 source(s, "v_max: Poli, Kennedy & Blackwell (2007), Sects. 2.2, 2.4; ω: Shi & Eberhart (1998), via Poli et al., Sect. 2.3");
 notes(s, 5);
 
-// ===================== Slide 6: one step by hand =====================
+// ===================== Slide 6: one step by hand, iteration 0 =====================
 s = pres.addSlide({ masterName: "CONTENT" });
-header(s, "One step by hand", "Member 2");
-T(s, "f(x) = x²,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit.  P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6.  P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3", { x: 0.5, y: 1.0, w: 9.0, h: 0.45, fontSize: 13 });
+header(s, "One step by hand: iteration 0", "Member 2");
+T(s, "f(x) = x²,  one dimension,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit", { x: 0.5, y: 1.05, w: 9.0, h: 0.35, fontSize: 15, fontFace: HEAD });
+const rows6a = [["Particle", "x(0)", "v(0)", "r₁", "r₂", "f(x(0))", "pbest"],
+  ["P1", "3", "0.5", "0.4", "0.6", "9", "3"],
+  ["P2", "−2", "−0.5", "0.8", "0.3", "4  ★ gbest", "−2"]];
+s.addTable(rows6a.map((r, i) => r.map((c, j) => ({ text: c, options: {
+  bold: i === 0 || j === 0 || (i === 2 && j === 5), color: i === 0 ? WHITE : (i === 2 && j === 5 ? ORANGE : NAVY),
+  fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
+  { x: 0.5, y: 1.55, w: 9.0, colW: [1.2, 1.1, 1.1, 1.0, 1.0, 1.9, 1.7], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
+{
+  const X0 = 4.69, U = 1.2333, xl = (v) => X0 + v * U, LY = 3.55;
+  s.addShape(pres.shapes.LINE, { x: 1.0, y: LY, w: 8.0, h: 0, line: { color: GREY, width: 1.25 } });
+  [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
+    s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.06, w: 0, h: 0.12, line: { color: GREY, width: 1 } });
+    T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.3, y: LY + 0.1, w: 0.6, h: 0.25, fontSize: 11, color: GREY, align: "center" });
+  });
+  T(s, "optimum", { x: xl(0) - 0.5, y: LY + 0.32, w: 1.0, h: 0.22, fontSize: 10, italic: true, color: GREY, align: "center" });
+  s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.1, y: LY - 0.1, w: 0.2, h: 0.2, fill: { color: TEAL }, line: { color: TEAL } });
+  s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.1, y: LY - 0.1, w: 0.2, h: 0.2, fill: { color: ORANGE }, line: { color: ORANGE } });
+  T(s, "P1: x = 3, f = 9", { x: xl(3) - 1.2, y: LY - 0.5, w: 1.6, h: 0.28, fontSize: 13, bold: true, color: TEAL, align: "center" });
+  T(s, "P2 = gbest: x = −2, f = 4", { x: xl(-2) - 1.2, y: LY - 0.5, w: 2.4, h: 0.28, fontSize: 13, bold: true, color: ORANGE, align: "center" });
+}
+card(s, 0.5, 4.38, 9.0, 0.72);
+T(s, [{ text: "At the start, pbest = x for every particle, ", options: { bold: true } },
+  { text: "so the cognitive term c₁r₁(pbest − x) will be 0 in the first update." }],
+  { x: 0.7, y: 4.42, w: 8.6, h: 0.64, fontSize: 15, valign: "middle" });
+source(s, "Team worked example (report Table 2)");
+notes(s, 6);
+
+// ===================== Slide 6b: one step by hand, iteration 0 -> 1 =====================
+s = pres.addSlide({ masterName: "CONTENT" });
+header(s, "One step by hand: iteration 0 → 1", "Member 2");
 const rows7 = [["Step", "P1", "P2 (gbest)"],
   ["Inertia  ω·v", "0.7·0.5 = 0.35", "0.7·(−0.5) = −0.35"],
   ["Cognitive  c₁r₁(pbest − x)", "1.5·0.4·(3 − 3) = 0", "1.5·0.8·(−2 − (−2)) = 0"],
@@ -249,29 +279,30 @@ const rows7 = [["Step", "P1", "P2 (gbest)"],
   ["f(x(1)) = x(1)²", "(−1.15)² = 1.3225", "(−2.35)² = 5.5225"]];
 s.addTable(rows7.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || j === 0 || i === 5, color: i === 0 ? WHITE : (i === 5 && j > 0 ? TEAL : NAVY),
-  fill: { color: i === 0 ? NAVY : (i === 5 ? LT2 : WHITE) }, fontSize: 11.5, fontFace: BODY,
+  fill: { color: i === 0 ? NAVY : (i === 5 ? LT2 : WHITE) }, fontSize: 12, fontFace: BODY,
   align: j === 0 ? "left" : "center", valign: "middle" } }))),
-  { x: 0.5, y: 1.5, w: 5.9, colW: [2.1, 1.9, 1.9], rowH: 0.34, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
-// number line (right column)
-const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.85;
-s.addShape(pres.shapes.LINE, { x: 6.6, y: LY, w: 2.9, h: 0, line: { color: GREY, width: 1.25 } });
-[-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
-  s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.05, w: 0, h: 0.1, line: { color: GREY, width: 1 } });
-  T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.2, y: LY + 0.08, w: 0.4, h: 0.22, fontSize: 10, color: GREY, align: "center" });
-});
-T(s, "optimum", { x: xl(0) - 0.4, y: LY + 0.28, w: 0.8, h: 0.2, fontSize: 9, italic: true, color: GREY, align: "center" });
-s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.08, y: LY - 0.08, w: 0.16, h: 0.16, fill: { color: TEAL }, line: { color: TEAL } });
-s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.08, y: LY - 0.08, w: 0.16, h: 0.16, fill: { color: ORANGE }, line: { color: ORANGE } });
-arrowLine(s, xl(3), LY - 0.28, xl(-1.15), TEAL);
-T(s, "P1: 3 → −1.15, overshoots (f 9 → 1.32)", { x: 6.6, y: LY - 0.62, w: 2.9, h: 0.26, fontSize: 11, bold: true, color: TEAL, align: "right" });
-arrowLine(s, xl(-2), LY - 0.28, xl(-2.35), RED);
-T(s, "P2: −2 → −2.35, worse (f 4 → 5.52)", { x: 6.6, y: LY + 0.52, w: 2.9, h: 0.26, fontSize: 11, bold: true, color: RED });
+  { x: 0.5, y: 1.1, w: 5.9, colW: [2.1, 1.9, 1.9], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
+{
+  const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.6;
+  s.addShape(pres.shapes.LINE, { x: 6.6, y: LY, w: 2.9, h: 0, line: { color: GREY, width: 1.25 } });
+  [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
+    s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.05, w: 0, h: 0.1, line: { color: GREY, width: 1 } });
+    T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.2, y: LY + 0.08, w: 0.4, h: 0.22, fontSize: 10, color: GREY, align: "center" });
+  });
+  T(s, "optimum", { x: xl(0) - 0.4, y: LY + 0.28, w: 0.8, h: 0.2, fontSize: 9, italic: true, color: GREY, align: "center" });
+  s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.08, y: LY - 0.08, w: 0.16, h: 0.16, fill: { color: TEAL }, line: { color: TEAL } });
+  s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.08, y: LY - 0.08, w: 0.16, h: 0.16, fill: { color: ORANGE }, line: { color: ORANGE } });
+  arrowLine(s, xl(3), LY - 0.28, xl(-1.15), TEAL);
+  T(s, "P1: 3 → −1.15, overshoots (f 9 → 1.32)", { x: 6.6, y: LY - 0.62, w: 2.9, h: 0.26, fontSize: 11, bold: true, color: TEAL, align: "right" });
+  arrowLine(s, xl(-2), LY - 0.28, xl(-2.35), RED);
+  T(s, "P2: −2 → −2.35, worse (f 4 → 5.52)", { x: 6.6, y: LY + 0.52, w: 2.9, h: 0.26, fontSize: 11, bold: true, color: RED });
+}
 card(s, 0.5, 4.38, 9.0, 0.72);
-T(s, [{ text: "Cognitive term is 0 at the first step (pbest = x). ", options: { bold: true } },
-  { text: "One particle gets worse, yet gbest improves from −2 to −1.15 (f 4 → 1.32)." }],
+T(s, [{ text: "One particle gets worse, yet the swarm gets better: ", options: { bold: true } },
+  { text: "gbest moves from −2 to −1.15 (f 4 → 1.32)." }],
   { x: 0.7, y: 4.42, w: 8.6, h: 0.64, fontSize: 15, valign: "middle" });
 source(s, "Team worked example (report Table 2)");
-notes(s, 6);
+notes(s, "6b");
 
 // ===================== Slide 7: setup =====================
 s = pres.addSlide({ masterName: "CONTENT" });
@@ -326,21 +357,23 @@ notes(s, 8);
 // ===================== Slide 9: inertia =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "How much inertia?", "Member 3");
-const rows9 = [["Mean final fitness", "A: ω = 0.4", "B: ω = 0.7", "C: ω = 0.9"],
+s.addImage({ path: FIG("fig_omega_sphere.png"), x: 0.5, y: 1.0, w: 4.35, h: 2.82, altText: "Sphere: mean best fitness against iteration for omega 0.4, 0.7 and 0.9 over five seeds" });
+s.addImage({ path: FIG("fig_omega_rastrigin.png"), x: 5.15, y: 1.0, w: 4.35, h: 2.82, altText: "Rastrigin: mean best fitness against iteration for omega 0.4, 0.7 and 0.9 over five seeds" });
+const rows9 = [["Mean final fitness", "ω = 0.4", "ω = 0.7", "ω = 0.9"],
   ["Sphere", "8.8 × 10⁻³⁰", "1.0 × 10⁻¹²", "3.6 × 10⁻⁴"],
   ["Rastrigin", "≈ 0", "1.1 × 10⁻⁶", "0.164"]];
 s.addTable(rows9.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || j === 0 || (j === 1 && i > 0), color: i === 0 || (j === 1 && i > 0) ? WHITE : NAVY,
-  fill: { color: i === 0 ? NAVY : (j === 1 ? TEAL : WHITE) }, fontSize: 16, fontFace: BODY, align: "center", valign: "middle" } }))),
-  { x: 0.5, y: 1.1, w: 9.0, colW: [2.4, 2.2, 2.2, 2.2], rowH: 0.52, border: { type: "solid", pt: 0.75, color: PALE } });
-const p9 = [["High ω keeps particles moving: ", "ω = 0.9 is slowest to settle on both functions"],
-  ["Depends on v_max: ", "with v_max = 2.0 or 5.12, one ω = 0.4 Rastrigin run stalls at 0.995, and ω = 0.7 becomes best"],
-  ["Only five seeds: ", "one ω = 0.9 run (0.67) dominates its Rastrigin mean; 10⁻³⁰ vs 10⁻¹² has no practical meaning"]];
+  fill: { color: i === 0 ? NAVY : (j === 1 ? TEAL : WHITE) }, fontSize: 11.5, fontFace: BODY, align: "center", valign: "middle" } }))),
+  { x: 0.5, y: 3.98, w: 4.6, colW: [1.45, 1.05, 1.05, 1.05], rowH: 0.34, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.03 });
+const p9 = [["High ω keeps moving: ", "ω = 0.9 settles slowest on both"],
+  ["Depends on v_max: ", "with v_max ≤ 5.12 one ω = 0.4 Rastrigin run stalls (0.995)"],
+  ["Five seeds only: ", "one bad run can dominate a mean"]];
 p9.forEach(([b, t], i) => {
-  badge(s, 0.5, 2.95 + i * 0.68, i + 1);
-  T(s, [{ text: b, options: { bold: true } }, { text: t }], { x: 1.1, y: 2.92 + i * 0.68, w: 8.4, h: 0.55, fontSize: 14, valign: "middle" });
+  badge(s, 5.35, 4.0 + i * 0.36, i + 1, 0.28);
+  T(s, [{ text: b, options: { bold: true } }, { text: t }], { x: 5.72, y: 3.98 + i * 0.36, w: 3.8, h: 0.32, fontSize: 11.5, valign: "middle" });
 });
-source(s, "Team experiment: 20 particles, c₁ = c₂ = 1.5, v_max = 10.24, seeds 0–4 (report Tables 6–7)");
+source(s, "Team experiment: 20 particles, c₁ = c₂ = 1.5, v_max = 10.24, seeds 0–4, bands = min–max (report Tables 6–7)");
 notes(s, 9);
 
 // ===================== Slide 10: same budget =====================

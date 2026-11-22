@@ -26,10 +26,11 @@
 | 3 | TV1 | Version 1: an "if" rule | 0:55 | Đọc bài bắt buộc (15đ); cân bằng pbest/gbest |
 | 4 | TV1 | Version 2: pull by distance, then factor 2 | 1:00 | Đọc bài bắt buộc; vì sao cần quán tính |
 | 5 | TV1 | Version 3: speed limit, then inertia | 1:20 | Task 2: ω, c₁, c₂, r₁, r₂, v_max; bài khuyến nghị |
-| 6 | TV2 | One step by hand | 1:30 | Task 2: tính tay 2 hạt, 1 chiều; ngay sau công thức, trước thí nghiệm |
+| 6, 6b | TV2 | One step by hand: iteration 0 · iteration 0 → 1 | 1:30 | Task 2: tính tay 2 hạt, 1 chiều; tách 2 slide (trạng thái vòng 0; thế số từng bước sang vòng 1) |
 | 7 | TV2 | Test problems and setup | 1:10 | Task 3: hàm, miền, cách tính fitness |
 | 8 | TV2 | Five particles: iteration 0 → 1 | 1:40 | Task 4; đầu ra tối thiểu 1 |
 | 9 | TV3 | How much inertia? | 1:15 | Task 4: 3 cấu hình × 5 seed; độ nhạy tham số |
+
 | 10 | TV3 | Same budget, two landscapes | 1:20 | Task 5; đầu ra tối thiểu 2 |
 | 11 | TV3 | When the swarm gets stuck | 1:20 | Task 6: hội tụ sớm; đầu ra tối thiểu 3 |
 | 12 | TV3 | So what? Answer, uses, limits | 1:15 | Task 6: 2 ứng dụng; phân tích phản biện (10đ) |
@@ -223,6 +224,8 @@ Giữ slide 6 hiện tại (bảng + trục số); chỉ thêm dòng giả thi�
 ## 4. Phần 3, TV3: PSO tốt đến đâu và hỏng khi nào (5:10)
 
 ### Slide 9. How much inertia? (1:15)
+
+> Cập nhật: slide có hai hình best fitness theo iteration (`figs/fig_omega_sphere.png`, `figs/fig_omega_rastrigin.png`) để đáp ứng "A fitness-versus-iteration plot" trong mục Minimum Expected Outputs; bảng trung bình thu nhỏ đặt bên dưới.
 
 **Thông điệp: ω càng nhỏ càng tinh chỉnh tốt trong thí nghiệm này, nhưng thứ hạng phụ thuộc giới hạn vận tốc; 5 seed chỉ đủ để minh họa.**
 

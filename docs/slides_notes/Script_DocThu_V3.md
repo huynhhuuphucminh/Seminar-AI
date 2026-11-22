@@ -58,13 +58,15 @@ Minh will now show it with real numbers.
 
 ## TV2: How PSO runs
 
-### Slide 6. One step by hand
+### Slide 6. One step by hand: iteration 0
 
 Thank you. Before the experiments, let us apply the rule once by hand, in one dimension, with f of x equals x squared.
 
 `[click]` Particle 1 is at 3, particle 2 at minus 2. f is 9 and 4, so particle 2 is the global best. At the start, each personal best is the current position, so the cognitive term is zero.
 
-`[click]` For particle 1, inertia is 0.7 times 0.5, which is 0.35, and the social pull is 1.5 times 0.6 times minus 5, which is minus 4.5. Adding the three terms, the velocity is minus 4.15. The new position is x plus v: 3 minus 4.15, which is minus 1.15. It overshoots zero, but its value drops from 9 to 1.32.
+### Slide 6b. One step by hand: iteration 0 to 1
+
+For particle 1, inertia is 0.7 times 0.5, which is 0.35, and the social pull is 1.5 times 0.6 times minus 5, which is minus 4.5. Adding the three terms, the velocity is minus 4.15. The new position is x plus v: 3 minus 4.15, which is minus 1.15. It overshoots zero, but its value drops from 9 to 1.32.
 
 `[click]` Particle 2 is the global best, so nothing pulls it. Its new position is minus 2 minus 0.35, which is minus 2.35, so it gets worse.
 
@@ -102,9 +104,9 @@ Trung will now show what happens over many runs.
 
 Thank you. First, we changed only the inertia weight: 0.4, 0.7 and 0.9, with five seeds each.
 
-`[click]` On both functions, the smallest omega gave the best mean, and 0.9 was the worst: with high inertia, particles take longer to settle.
+`[click]` The plots show the best fitness at each iteration. On both functions, the smallest omega gave the best mean, and 0.9 was the worst: with high inertia, particles take longer to settle.
 
-`[click]` But with a tighter speed limit, one run with omega 0.4 got stuck on Rastrigin, and 0.7 became best. With five seeds, one bad run can dominate a mean.
+`[click]` But with a tighter speed limit, one run with omega 0.4 got stuck on Rastrigin, and 0.7 became best.
 
 So inertia matters, but the best value depends on the other settings.
 
@@ -154,7 +156,7 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 |---|---|---|---|---|---|
 | TV1 | 0–5 | 549 | 4:13 | 4:59 | khoảng 5:59 |
 | TV2 | 6–8 | 403 | 3:06 | 3:40 | khoảng 4:24 |
-| TV3 | 9–12 | 416 | 3:12 | 3:47 | khoảng 4:32 |
-| **Tổng** | | **1,368** | **10:31** | **12:26** | **khoảng 14:55** |
+| TV3 | 9–12 | 415 | 3:12 | 3:46 | khoảng 4:32 |
+| **Tổng** | | **1,367** | **10:31** | **12:26** | **khoảng 14:55** |
 
-Script đã được rút gọn để vừa 15 phút. Nếu bấm giờ thật vẫn quá, cắt tiếp theo thứ tự: câu "With five seeds, one bad run can dominate a mean." ở slide 9, cụm "like the red dot on slide 1" ở slide 10.
+Script đã được rút gọn để vừa 15 phút. Nếu bấm giờ thật vẫn quá, cắt tiếp theo thứ tự: cụm "like the red dot on slide 1" ở slide 10.
