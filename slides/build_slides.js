@@ -265,27 +265,33 @@ notes(s, 6);
 // ===================== Slide 7: one step by hand =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "One step by hand", "Member 2");
-T(s, "f(x) = x²,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit.  P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6.  P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3", { x: 0.5, y: 1.0, w: 9.0, h: 0.5, fontSize: 13 });
-const rows7 = [["Particle", "Inertia", "Cognitive", "Social", "v(1)", "x(1)", "f(x(1))"],
-  ["1", "0.7·0.5 = 0.35", "0", "1.5·0.6·(−5) = −4.5", "−4.15", "−1.15", "1.3225"],
-  ["2 (gbest)", "−0.35", "0", "0", "−0.35", "−2.35", "5.5225"]];
+T(s, "f(x) = x²,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit.  P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6.  P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3", { x: 0.5, y: 1.0, w: 9.0, h: 0.45, fontSize: 13 });
+const rows7 = [["Step", "P1", "P2 (gbest)"],
+  ["Inertia  ω·v", "0.7·0.5 = 0.35", "0.7·(−0.5) = −0.35"],
+  ["Cognitive  c₁r₁(pbest − x)", "1.5·0.4·(3 − 3) = 0", "1.5·0.8·(−2 − (−2)) = 0"],
+  ["Social  c₂r₂(gbest − x)", "1.5·0.6·(−2 − 3) = −4.5", "1.5·0.3·(−2 − (−2)) = 0"],
+  ["v(1) = sum of the three", "0.35 + 0 − 4.5 = −4.15", "−0.35 + 0 + 0 = −0.35"],
+  ["x(1) = x + v(1)", "3 + (−4.15) = −1.15", "−2 + (−0.35) = −2.35"],
+  ["f(x(1)) = x(1)²", "(−1.15)² = 1.3225", "(−2.35)² = 5.5225"]];
 s.addTable(rows7.map((r, i) => r.map((c, j) => ({ text: c, options: {
-  bold: i === 0 || (i === 1 && (j === 4 || j === 5)), color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 13, fontFace: BODY, align: "center", valign: "middle" } }))),
-  { x: 0.5, y: 1.55, w: 9.0, colW: [1.1, 1.45, 1.0, 2.0, 1.1, 1.1, 1.25], rowH: 0.36, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.04 });
-// number line
-const X0 = 4.69, U = 1.2333, xl = (v) => X0 + v * U, LY = 3.72;
-s.addShape(pres.shapes.LINE, { x: 1.0, y: LY, w: 8.0, h: 0, line: { color: GREY, width: 1.25 } });
+  bold: i === 0 || j === 0 || i === 5, color: i === 0 ? WHITE : (i === 5 && j > 0 ? TEAL : NAVY),
+  fill: { color: i === 0 ? NAVY : (i === 5 ? LT2 : WHITE) }, fontSize: 11.5, fontFace: BODY,
+  align: j === 0 ? "left" : "center", valign: "middle" } }))),
+  { x: 0.5, y: 1.5, w: 5.9, colW: [2.1, 1.9, 1.9], rowH: 0.34, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
+// number line (right column)
+const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.85;
+s.addShape(pres.shapes.LINE, { x: 6.6, y: LY, w: 2.9, h: 0, line: { color: GREY, width: 1.25 } });
 [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
-  s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.06, w: 0, h: 0.12, line: { color: GREY, width: 1 } });
-  T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.3, y: LY + 0.1, w: 0.6, h: 0.25, fontSize: 11, color: GREY, align: "center" });
+  s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.05, w: 0, h: 0.1, line: { color: GREY, width: 1 } });
+  T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.2, y: LY + 0.08, w: 0.4, h: 0.22, fontSize: 10, color: GREY, align: "center" });
 });
-T(s, "optimum", { x: xl(0) - 0.5, y: LY + 0.32, w: 1.0, h: 0.22, fontSize: 10, italic: true, color: GREY, align: "center" });
-s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.09, y: LY - 0.09, w: 0.18, h: 0.18, fill: { color: TEAL }, line: { color: TEAL } });
-s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.09, y: LY - 0.09, w: 0.18, h: 0.18, fill: { color: ORANGE }, line: { color: ORANGE } });
-arrowLine(s, xl(3), LY - 0.32, xl(-1.15), TEAL);
-T(s, "P1: 3 → −1.15  (overshoots, f 9 → 1.32)", { x: xl(-1.15), y: LY - 0.65, w: 3.8, h: 0.28, fontSize: 12, bold: true, color: TEAL });
-arrowLine(s, xl(-2), LY - 0.3, xl(-2.35), RED);
-T(s, "P2: −2 → −2.35  (f 4 → 5.52)", { x: 1.0, y: LY - 0.92, w: 2.8, h: 0.28, fontSize: 12, bold: true, color: RED });
+T(s, "optimum", { x: xl(0) - 0.4, y: LY + 0.28, w: 0.8, h: 0.2, fontSize: 9, italic: true, color: GREY, align: "center" });
+s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.08, y: LY - 0.08, w: 0.16, h: 0.16, fill: { color: TEAL }, line: { color: TEAL } });
+s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.08, y: LY - 0.08, w: 0.16, h: 0.16, fill: { color: ORANGE }, line: { color: ORANGE } });
+arrowLine(s, xl(3), LY - 0.28, xl(-1.15), TEAL);
+T(s, "P1: 3 → −1.15, overshoots (f 9 → 1.32)", { x: 6.6, y: LY - 0.62, w: 2.9, h: 0.26, fontSize: 11, bold: true, color: TEAL, align: "right" });
+arrowLine(s, xl(-2), LY - 0.28, xl(-2.35), RED);
+T(s, "P2: −2 → −2.35, worse (f 4 → 5.52)", { x: 6.6, y: LY + 0.52, w: 2.9, h: 0.26, fontSize: 11, bold: true, color: RED });
 card(s, 0.5, 4.38, 9.0, 0.72);
 T(s, [{ text: "Cognitive term is 0 at the first step (pbest = x). ", options: { bold: true } },
   { text: "One particle gets worse, yet gbest improves from −2 to −1.15 (f 4 → 1.32)." }],

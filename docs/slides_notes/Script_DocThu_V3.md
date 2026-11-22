@@ -76,9 +76,9 @@ First, one step by hand, in one dimension, with f of x equals x squared.
 
 `[click]` Particle 1 is at 3, particle 2 at minus 2. f is 9 and 4, so particle 2 is the global best. At the start, each personal best is the current position, so the cognitive term is zero.
 
-`[click]` For particle 1, inertia is 0.7 times 0.5, which is 0.35, and the social pull is 1.5 times 0.6 times minus 5, which is minus 4.5. So the velocity is minus 4.15 and the particle jumps to minus 1.15. It overshoots zero, but its value drops from 9 to 1.32.
+`[click]` For particle 1, inertia is 0.7 times 0.5, which is 0.35, and the social pull is 1.5 times 0.6 times minus 5, which is minus 4.5. Adding the three terms, the velocity is minus 4.15. The new position is x plus v: 3 minus 4.15, which is minus 1.15. It overshoots zero, but its value drops from 9 to 1.32.
 
-`[click]` Particle 2 is the global best, so nothing pulls it. It drifts to minus 2.35 and gets worse.
+`[click]` Particle 2 is the global best, so nothing pulls it. Its new position is minus 2 minus 0.35, which is minus 2.35, so it gets worse.
 
 `[click]` But the global best moves from minus 2 to minus 1.15. One particle got worse; the swarm got better.
 
@@ -153,8 +153,8 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 | Người | Slide | Số từ | Nhanh | Chậm | Ước tính thật |
 |---|---|---|---|---|---|
 | TV1 | 0–5 | 549 | 4:13 | 4:59 | khoảng 5:59 |
-| TV2 | 6–8 | 389 | 3:00 | 3:32 | khoảng 4:15 |
+| TV2 | 6–8 | 407 | 3:08 | 3:42 | khoảng 4:26 |
 | TV3 | 9–12 | 416 | 3:12 | 3:47 | khoảng 4:32 |
-| **Tổng** | | **1,354** | **10:25** | **12:19** | **khoảng 14:46** |
+| **Tổng** | | **1,372** | **10:33** | **12:28** | **khoảng 14:58** |
 
 Script đã được rút gọn để vừa 15 phút. Nếu bấm giờ thật vẫn quá, cắt tiếp theo thứ tự: câu "We also recomputed particle 2 by hand…" ở slide 8, câu "With five seeds, one bad run can dominate a mean." ở slide 9, cụm "like the red dot on slide 1" ở slide 10.
