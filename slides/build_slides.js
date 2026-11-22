@@ -236,33 +236,7 @@ T(s, [{ text: "Large ω explores, small ω refines\n", options: { bold: true, co
 source(s, "v_max: Poli, Kennedy & Blackwell (2007), Sects. 2.2, 2.4; ω: Shi & Eberhart (1998), via Poli et al., Sect. 2.3");
 notes(s, 5);
 
-// ===================== Slide 6: setup =====================
-s = pres.addSlide({ masterName: "CONTENT" });
-header(s, "Test problems and setup", "Member 2");
-[["Sphere", "f(x) = Σᵢ xᵢ²", "Unimodal: tests speed", "slide_func_sphere.png"],
- ["Rastrigin", "f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)", "Multimodal, grid of local minima: tests trapping", "slide_func_rastrigin.png"]].forEach(([n, f, d, img], i) => {
-  const x = 0.5 + i * 2.85;
-  card(s, x, 1.05, 2.7, 3.2);
-  T(s, n, { x: x + 0.15, y: 1.12, w: 2.4, h: 0.32, fontFace: HEAD, fontSize: 17, bold: true });
-  T(s, f, { x: x + 0.15, y: 1.45, w: 2.45, h: 0.32, fontFace: HEAD, fontSize: 12 });
-  s.addImage({ path: FIG(img), x: x + 0.38, y: 1.8, w: 1.94, h: 1.82, altText: n + " contour plot with the minimum at the origin" });
-  T(s, d, { x: x + 0.15, y: 3.72, w: 2.45, h: 0.45, fontSize: 12, color: DK2 });
-});
-T(s, "Both: n = 2, x ∈ [−5.12, 5.12]², minimum f = 0 at (0, 0); fitness = f(x), lower is better", { x: 0.5, y: 4.35, w: 5.55, h: 0.5, fontSize: 12, italic: true, color: DK2 });
-// right column: loop + settings + budget
-T(s, "Loop", { x: 6.3, y: 1.05, w: 3.2, h: 0.28, fontSize: 13, bold: true, color: TEAL });
-["Initialise x, v at random", "Evaluate f", "Update pbest, gbest", "Move every particle, repeat"].forEach((t, i) => {
-  badge(s, 6.3, 1.38 + i * 0.38, i + 1, 0.3);
-  T(s, t, { x: 6.7, y: 1.38 + i * 0.38, w: 2.8, h: 0.3, fontSize: 12.5, valign: "middle" });
-});
-T(s, "Our settings", { x: 6.3, y: 2.95, w: 3.2, h: 0.28, fontSize: 13, bold: true, color: TEAL });
-T(s, "ω = 0.7, c₁ = c₂ = 1.5 (2007 standard, rounded); v_max = 10.24 (domain width); positions put back on the boundary", { x: 6.3, y: 3.23, w: 3.2, h: 0.8, fontSize: 12 });
-T(s, "2,020", { x: 6.3, y: 4.05, w: 1.5, h: 0.6, fontFace: HEAD, fontSize: 30, bold: true, color: TEAL, valign: "middle" });
-T(s, "evaluations per run: 20 particles × 100 iterations + 20 at start; seeds 0–4", { x: 7.8, y: 4.05, w: 1.75, h: 0.9, fontSize: 11, color: DK2 });
-source(s, "Functions and settings: team design (report Sect. 3); figures: team illustration");
-notes(s, 6);
-
-// ===================== Slide 7: one step by hand =====================
+// ===================== Slide 6: one step by hand =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "One step by hand", "Member 2");
 T(s, "f(x) = x²,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit.  P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6.  P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3", { x: 0.5, y: 1.0, w: 9.0, h: 0.45, fontSize: 13 });
@@ -297,6 +271,32 @@ T(s, [{ text: "Cognitive term is 0 at the first step (pbest = x). ", options: { 
   { text: "One particle gets worse, yet gbest improves from −2 to −1.15 (f 4 → 1.32)." }],
   { x: 0.7, y: 4.42, w: 8.6, h: 0.64, fontSize: 15, valign: "middle" });
 source(s, "Team worked example (report Table 2)");
+notes(s, 6);
+
+// ===================== Slide 7: setup =====================
+s = pres.addSlide({ masterName: "CONTENT" });
+header(s, "Test problems and setup", "Member 2");
+[["Sphere", "f(x) = Σᵢ xᵢ²", "Unimodal: tests speed", "slide_func_sphere.png"],
+ ["Rastrigin", "f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)", "Multimodal, grid of local minima: tests trapping", "slide_func_rastrigin.png"]].forEach(([n, f, d, img], i) => {
+  const x = 0.5 + i * 2.85;
+  card(s, x, 1.05, 2.7, 3.2);
+  T(s, n, { x: x + 0.15, y: 1.12, w: 2.4, h: 0.32, fontFace: HEAD, fontSize: 17, bold: true });
+  T(s, f, { x: x + 0.15, y: 1.45, w: 2.45, h: 0.32, fontFace: HEAD, fontSize: 12 });
+  s.addImage({ path: FIG(img), x: x + 0.38, y: 1.8, w: 1.94, h: 1.82, altText: n + " contour plot with the minimum at the origin" });
+  T(s, d, { x: x + 0.15, y: 3.72, w: 2.45, h: 0.45, fontSize: 12, color: DK2 });
+});
+T(s, "Both: n = 2, x ∈ [−5.12, 5.12]², minimum f = 0 at (0, 0); fitness = f(x), lower is better", { x: 0.5, y: 4.35, w: 5.55, h: 0.5, fontSize: 12, italic: true, color: DK2 });
+// right column: loop + settings + budget
+T(s, "Loop", { x: 6.3, y: 1.05, w: 3.2, h: 0.28, fontSize: 13, bold: true, color: TEAL });
+["Initialise x, v at random", "Evaluate f", "Update pbest, gbest", "Move every particle, repeat"].forEach((t, i) => {
+  badge(s, 6.3, 1.38 + i * 0.38, i + 1, 0.3);
+  T(s, t, { x: 6.7, y: 1.38 + i * 0.38, w: 2.8, h: 0.3, fontSize: 12.5, valign: "middle" });
+});
+T(s, "Our settings", { x: 6.3, y: 2.95, w: 3.2, h: 0.28, fontSize: 13, bold: true, color: TEAL });
+T(s, "ω = 0.7, c₁ = c₂ = 1.5 (2007 standard, rounded); v_max = 10.24 (domain width); positions put back on the boundary", { x: 6.3, y: 3.23, w: 3.2, h: 0.8, fontSize: 12 });
+T(s, "2,020", { x: 6.3, y: 4.05, w: 1.5, h: 0.6, fontFace: HEAD, fontSize: 30, bold: true, color: TEAL, valign: "middle" });
+T(s, "evaluations per run: 20 particles × 100 iterations + 20 at start; seeds 0–4", { x: 7.8, y: 4.05, w: 1.75, h: 0.9, fontSize: 11, color: DK2 });
+source(s, "Functions and settings: team design (report Sect. 3); figures: team illustration");
 notes(s, 7);
 
 // ===================== Slide 8: five particles =====================

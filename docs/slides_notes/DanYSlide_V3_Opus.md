@@ -26,8 +26,8 @@
 | 3 | TV1 | Version 1: an "if" rule | 0:55 | Đọc bài bắt buộc (15đ); cân bằng pbest/gbest |
 | 4 | TV1 | Version 2: pull by distance, then factor 2 | 1:00 | Đọc bài bắt buộc; vì sao cần quán tính |
 | 5 | TV1 | Version 3: speed limit, then inertia | 1:20 | Task 2: ω, c₁, c₂, r₁, r₂, v_max; bài khuyến nghị |
-| 6 | TV2 | Test problems and setup | 1:10 | Task 3: hàm, miền, cách tính fitness |
-| 7 | TV2 | One step by hand | 1:30 | Task 2: tính tay 2 hạt, 1 chiều |
+| 6 | TV2 | One step by hand | 1:30 | Task 2: tính tay 2 hạt, 1 chiều; ngay sau công thức, trước thí nghiệm |
+| 7 | TV2 | Test problems and setup | 1:10 | Task 3: hàm, miền, cách tính fitness |
 | 8 | TV2 | Five particles: iteration 0 → 1 | 1:40 | Task 4; đầu ra tối thiểu 1 |
 | 9 | TV3 | How much inertia? | 1:15 | Task 4: 3 cấu hình × 5 seed; độ nhạy tham số |
 | 10 | TV3 | Same budget, two landscapes | 1:20 | Task 5; đầu ra tối thiểu 2 |
@@ -145,7 +145,7 @@ Giữ slide tiêu đề hiện tại. Lời nói: *"Good morning. We are present
 | v_max | speed limit per coordinate | with ω: can be as wide as the search range |
 
 - Chân: *Large ω explores, small ω refines. With ω (or χ), v_max can be set wide: V_max = X_max.*
-- Giá trị cụ thể của nhóm (ω = 0.7, c = 1.5, v_max = 10.24) **không** đặt ở đây; TV2 nói ở slide 6. Phần topology (gbest và lbest) chuyển vào slide dự phòng B2.
+- Giá trị cụ thể của nhóm (ω = 0.7, c = 1.5, v_max = 10.24) **không** đặt ở đây; TV2 nói ở slide 7. Phần topology (gbest và lbest) chuyển vào slide dự phòng B2.
 - Dải bậc thang: bậc ④ đổi thành **④ Speed limit v_max, then inertia ω (1998)**.
 
 **Nguồn.** v_max và vấn đề tốc độ: Poli et al. (2007), Sect. 2.2; ω: Shi & Eberhart (1998) qua Poli et al. (2007), Sect. 2.3; V_max = X_max: Poli et al. (2007), Sect. 2.4.
@@ -156,25 +156,7 @@ Giữ slide tiêu đề hiện tại. Lời nói: *"Good morning. We are present
 
 ## 3. Phần 2, TV2: PSO chạy thế nào (4:20)
 
-### Slide 6. Test problems and setup (1:10)
-
-**Thông điệp: hai hàm có cùng cực tiểu nhưng khác địa hình, một hàm kiểm tra tốc độ và một hàm kiểm tra khả năng bị kẹt; mọi phương pháp dùng cùng ngân sách.**
-
-**Bố cục.** Hai thẻ cạnh nhau có hình nhỏ của mỗi hàm; dải thiết lập ở dưới; vòng lặp thuật toán 4 bước bên phải.
-
-**Chữ trên slide**
-- **Sphere** `f(x) = Σᵢ xᵢ²`: unimodal → tests speed
-- **Rastrigin** `f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)`, n = 2: grid of local minima → tests trapping
-- Both: domain [−5.12, 5.12]², minimum f = 0 at (0, 0); **fitness = f(x), lower is better**
-- Loop: initialise x, v randomly → evaluate f → update pbest, gbest → move all particles → repeat
-- **Our settings:** ω = 0.7, c₁ = c₂ = 1.5 (2007 standard, rounded); v_max = 10.24 (domain width); positions put back on the boundary; ω = 0.4 and 0.9 tested on slide 9
-- Budget: 20 particles × 100 iterations + 20 initial = **2,020 evaluations**, seeds 0–4
-
-**Nguồn.** Team design (Report Sect. 3).
-
-**Lời nói:** xem `Script_DocThu_V3.md` (bản mới nhất, dùng thuật ngữ local minimum, unimodal, multimodal).
-
-### Slide 7. One step by hand (1:30)
+### Slide 6. One step by hand (1:30)
 
 **Thông điệp: ở bước đầu, thành phần nhận thức bằng 0; một hạt có thể tệ đi nhưng gbest của cả đàn vẫn tốt lên.**
 
@@ -195,6 +177,24 @@ Giữ slide 6 hiện tại (bảng + trục số); chỉ thêm dòng giả thi�
 **Nguồn.** Team worked example (Report Table 2).
 
 **Lời nói.** Let us do one step by hand, in one dimension, with f equal to x squared. Particle 1 is at 3, particle 2 at minus 2. Particle 2 has the lower value, 4, so it is the global best. At the start, each particle's best is where it stands, so the cognitive term is zero for both. For particle 1, inertia gives 0.35 and the social pull gives 1.5 times 0.6 times minus 5, which is minus 4.5. Its velocity is minus 4.15, so it jumps to minus 1.15: it overshoots zero, but its value drops from 9 to 1.32. Particle 2 is the global best, so nothing pulls it; it drifts with inertia and gets worse. Still, the swarm's best improves from minus 2 to minus 1.15.
+
+### Slide 7. Test problems and setup (1:10)
+
+**Thông điệp: hai hàm có cùng cực tiểu nhưng khác địa hình, một hàm kiểm tra tốc độ và một hàm kiểm tra khả năng bị kẹt; mọi phương pháp dùng cùng ngân sách.**
+
+**Bố cục.** Hai thẻ cạnh nhau có hình nhỏ của mỗi hàm; dải thiết lập ở dưới; vòng lặp thuật toán 4 bước bên phải.
+
+**Chữ trên slide**
+- **Sphere** `f(x) = Σᵢ xᵢ²`: unimodal → tests speed
+- **Rastrigin** `f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)`, n = 2: grid of local minima → tests trapping
+- Both: domain [−5.12, 5.12]², minimum f = 0 at (0, 0); **fitness = f(x), lower is better**
+- Loop: initialise x, v randomly → evaluate f → update pbest, gbest → move all particles → repeat
+- **Our settings:** ω = 0.7, c₁ = c₂ = 1.5 (2007 standard, rounded); v_max = 10.24 (domain width); positions put back on the boundary; ω = 0.4 and 0.9 tested on slide 9
+- Budget: 20 particles × 100 iterations + 20 initial = **2,020 evaluations**, seeds 0–4
+
+**Nguồn.** Team design (Report Sect. 3).
+
+**Lời nói:** xem `Script_DocThu_V3.md` (bản mới nhất, dùng thuật ngữ local minimum, unimodal, multimodal).
 
 ### Slide 8. Five particles: iteration 0 → 1 (1:40)
 
