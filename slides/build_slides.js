@@ -308,16 +308,18 @@ notes(s, "6b");
 // ===================== Slide 7: setup =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "Test problems and setup", "Member 2");
-[["Sphere", "f(x) = Σᵢ xᵢ²", "Unimodal: tests speed", "slide_func_sphere.png"],
- ["Rastrigin", "f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)", "Multimodal, grid of local minima: tests trapping", "slide_func_rastrigin.png"]].forEach(([n, f, d, img], i) => {
+[["Sphere", "Σᵢ xᵢ² = x₁² + x₂²", "f(3, −1) = 9 + 1 = 10", "Unimodal: tests speed", "slide_func_sphere.png"],
+ ["Rastrigin", "10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)", "f(1, 0) = 20 + (1 − 10) + (0 − 10) = 1", "Multimodal: tests trapping", "slide_func_rastrigin.png"]].forEach(([n, f, ex, d, img], i) => {
   const x = 0.5 + i * 2.85;
   card(s, x, 1.05, 2.7, 3.2);
-  T(s, n, { x: x + 0.15, y: 1.12, w: 2.4, h: 0.32, fontFace: HEAD, fontSize: 17, bold: true });
-  T(s, f, { x: x + 0.15, y: 1.45, w: 2.45, h: 0.32, fontFace: HEAD, fontSize: 12 });
-  s.addImage({ path: FIG(img), x: x + 0.38, y: 1.8, w: 1.94, h: 1.82, altText: n + " contour plot with the minimum at the origin" });
-  T(s, d, { x: x + 0.15, y: 3.72, w: 2.45, h: 0.45, fontSize: 12, color: DK2 });
+  T(s, n, { x: x + 0.15, y: 1.1, w: 2.4, h: 0.32, fontFace: HEAD, fontSize: 17, bold: true });
+  T(s, "fitness function", { x: x + 1.3, y: 1.15, w: 1.3, h: 0.28, fontSize: 11, bold: true, color: TEAL, align: "right", valign: "middle" });
+  T(s, "f(x) = " + f, { x: x + 0.15, y: 1.42, w: 2.45, h: 0.3, fontFace: HEAD, fontSize: i ? 11 : 12.5 });
+  s.addImage({ path: FIG(img), x: x + 0.53, y: 1.76, w: 1.64, h: 1.54, altText: n + " contour plot with the minimum at the origin" });
+  T(s, [{ text: "e.g. ", options: { italic: true } }, { text: ex }], { x: x + 0.15, y: 3.36, w: 2.45, h: 0.28, fontFace: HEAD, fontSize: i ? 10.5 : 12 });
+  T(s, d, { x: x + 0.15, y: 3.72, w: 2.45, h: 0.4, fontSize: 12.5, bold: true, color: DK2 });
 });
-T(s, "Both: n = 2, x ∈ [−5.12, 5.12]², minimum f = 0 at (0, 0); fitness = f(x), lower is better", { x: 0.5, y: 4.35, w: 5.55, h: 0.5, fontSize: 12, italic: true, color: DK2 });
+T(s, "Both: n = 2, x ∈ [−5.12, 5.12]², minimum f = 0 at (0, 0). A particle's fitness is f at its position; lower is better", { x: 0.5, y: 4.35, w: 5.55, h: 0.5, fontSize: 12, italic: true, color: DK2 });
 // right column: loop + settings + budget
 T(s, "Loop", { x: 6.3, y: 1.05, w: 3.2, h: 0.28, fontSize: 13, bold: true, color: TEAL });
 ["Initialise x, v at random", "Evaluate f", "Update pbest, gbest", "Move every particle, repeat"].forEach((t, i) => {

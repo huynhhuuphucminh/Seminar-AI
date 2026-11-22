@@ -74,9 +74,9 @@ For particle 1, inertia is 0.7 times 0.5, which is 0.35, and the social pull is 
 
 ### Slide 7. Test problems and setup
 
-Now the experiments. We chose two functions with the same minimum, zero at the origin, but different fitness landscapes.
+Now the experiments. We chose two functions with the same minimum, zero at the origin, but different fitness landscapes. Fitness is the function value at a particle's position.
 
-`[click]` Sphere is unimodal, one minimum and no local minima, so it tests how fast the swarm converges. `[click]` Rastrigin is multimodal, with a grid of local minima, so it tests whether the swarm gets trapped in one.
+`[click]` Sphere is unimodal, with no local minima, so it tests how fast the swarm converges. `[click]` Rastrigin is multimodal, with a grid of local minima, so it tests whether the swarm gets trapped in one.
 
 `[click]` The algorithm is a loop: start at random, evaluate, update the memories, move every particle, repeat.
 
@@ -155,8 +155,8 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 | Người | Slide | Số từ | Nhanh | Chậm | Ước tính thật |
 |---|---|---|---|---|---|
 | TV1 | 0–5 | 549 | 4:13 | 4:59 | khoảng 5:59 |
-| TV2 | 6–8 | 412 | 3:10 | 3:45 | khoảng 4:30 |
+| TV2 | 6–8 | 419 | 3:13 | 3:49 | khoảng 4:34 |
 | TV3 | 9–12 | 408 | 3:08 | 3:43 | khoảng 4:27 |
-| **Tổng** | | **1,369** | **10:32** | **12:27** | **khoảng 14:56** |
+| **Tổng** | | **1,376** | **10:35** | **12:31** | **khoảng 15:01** |
 
 Script đã được rút gọn để vừa 15 phút và đã dùng hết các câu cắt dự phòng. Nếu bấm giờ thật vẫn quá, nói nhanh hơn ở slide 7–8 (tính tay) vì số đã có trên slide, không cần đọc từng phép nhân.
