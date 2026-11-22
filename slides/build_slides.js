@@ -239,16 +239,16 @@ notes(s, 5);
 // ===================== Slide 6: setup =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "Test problems and setup", "Member 2");
-[["Sphere", "f(x) = x₁² + x₂²", "Unimodal: tests speed", "slide_func_sphere.png"],
- ["Rastrigin", "f(x) = 20 + Σ (xᵢ² − 10 cos 2πxᵢ)", "Multimodal, grid of local minima: tests trapping", "slide_func_rastrigin.png"]].forEach(([n, f, d, img], i) => {
+[["Sphere", "f(x) = Σᵢ xᵢ²", "Unimodal: tests speed", "slide_func_sphere.png"],
+ ["Rastrigin", "f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)", "Multimodal, grid of local minima: tests trapping", "slide_func_rastrigin.png"]].forEach(([n, f, d, img], i) => {
   const x = 0.5 + i * 2.85;
   card(s, x, 1.05, 2.7, 3.2);
   T(s, n, { x: x + 0.15, y: 1.12, w: 2.4, h: 0.32, fontFace: HEAD, fontSize: 17, bold: true });
-  T(s, f, { x: x + 0.15, y: 1.45, w: 2.45, h: 0.32, fontFace: HEAD, fontSize: i ? 11.5 : 13 });
+  T(s, f, { x: x + 0.15, y: 1.45, w: 2.45, h: 0.32, fontFace: HEAD, fontSize: 12 });
   s.addImage({ path: FIG(img), x: x + 0.38, y: 1.8, w: 1.94, h: 1.82, altText: n + " contour plot with the minimum at the origin" });
   T(s, d, { x: x + 0.15, y: 3.72, w: 2.45, h: 0.45, fontSize: 12, color: DK2 });
 });
-T(s, "Both: [−5.12, 5.12]², minimum f = 0 at (0, 0); fitness = f(x), lower is better", { x: 0.5, y: 4.35, w: 5.55, h: 0.5, fontSize: 12, italic: true, color: DK2 });
+T(s, "Both: n = 2, x ∈ [−5.12, 5.12]², minimum f = 0 at (0, 0); fitness = f(x), lower is better", { x: 0.5, y: 4.35, w: 5.55, h: 0.5, fontSize: 12, italic: true, color: DK2 });
 // right column: loop + settings + budget
 T(s, "Loop", { x: 6.3, y: 1.05, w: 3.2, h: 0.28, fontSize: 13, bold: true, color: TEAL });
 ["Initialise x, v at random", "Evaluate f", "Update pbest, gbest", "Move every particle, repeat"].forEach((t, i) => {

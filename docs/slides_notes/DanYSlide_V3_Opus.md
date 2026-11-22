@@ -163,8 +163,8 @@ Giữ slide tiêu đề hiện tại. Lời nói: *"Good morning. We are present
 **Bố cục.** Hai thẻ cạnh nhau có hình nhỏ của mỗi hàm; dải thiết lập ở dưới; vòng lặp thuật toán 4 bước bên phải.
 
 **Chữ trên slide**
-- **Sphere** `f(x) = x₁² + x₂²`: unimodal → tests speed
-- **Rastrigin** `f(x) = 20 + Σ(xᵢ² − 10cos 2πxᵢ)`: grid of local minima → tests trapping
+- **Sphere** `f(x) = Σᵢ xᵢ²`: unimodal → tests speed
+- **Rastrigin** `f(x) = 10n + Σᵢ (xᵢ² − 10 cos 2πxᵢ)`, n = 2: grid of local minima → tests trapping
 - Both: domain [−5.12, 5.12]², minimum f = 0 at (0, 0); **fitness = f(x), lower is better**
 - Loop: initialise x, v randomly → evaluate f → update pbest, gbest → move all particles → repeat
 - **Our settings:** ω = 0.7, c₁ = c₂ = 1.5 (2007 standard, rounded); v_max = 10.24 (domain width); positions put back on the boundary; ω = 0.4 and 0.9 tested on slide 9
