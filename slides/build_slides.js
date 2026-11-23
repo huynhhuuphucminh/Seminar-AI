@@ -15,8 +15,9 @@ const OUT = process.argv[2] || path.join(ROOT, "slides", "Slide_Seminar_PSO.pptx
 const FIG = (f) => path.join(ROOT, "figs", f);
 
 // ---------- palette (same as the previous deck, theme "Swarm") ----------
-const NAVY = "1B2A41", DK2 = "324A5F", LT2 = "EEF3F6", TEAL = "2E7D8C", ORANGE = "F2A541",
-  LIGHT = "8FB8C4", RED = "C8553D", GREY = "5C6F82", PALE = "DDE7EC", WHITE = "FFFFFF";
+// warm natural palette: cream background, warm charcoal text, moss accent, terracotta second accent
+const NAVY = "33403A", DK2 = "5B5248", LT2 = "F1EADF", TEAL = "3F6E5A", ORANGE = "C8743A",
+  LIGHT = "C9D6CC", RED = "B5523B", GREY = "8A8073", PALE = "E4DBCC", WHITE = "FFFFFF", CREAM = "FAF7F2", FOREST = "2E4238";
 const HEAD = "Cambria", BODY = "Calibri", MONO = "Courier New";
 const TITLE = "Segoe UI Semibold"; // headings; body and formulas use Calibri (sans only, K-Dense design guide)
 
@@ -38,11 +39,11 @@ pres.author = "Seminar S01 team";
 pres.theme = { headFontFace: TITLE, bodyFontFace: BODY };
 
 pres.defineSlideMaster({
-  title: "CONTENT", background: { color: WHITE },
+  title: "CONTENT", background: { color: CREAM },
   objects: [],
   slideNumber: { x: 9.2, y: 5.25, w: 0.5, h: 0.25, fontFace: BODY, fontSize: 10, color: GREY, align: "right" },
 });
-pres.defineSlideMaster({ title: "DARK", background: { color: NAVY }, objects: [] });
+pres.defineSlideMaster({ title: "DARK", background: { color: FOREST }, objects: [] });
 
 // ---------- helpers ----------
 const T = (s, text, opt) => s.addText(text, Object.assign({ isTextBox: true, fontFace: BODY, color: NAVY, margin: 0, valign: "top" }, opt));
@@ -63,7 +64,7 @@ function header(s, title) {
   T(s, title, { x: 0.5, y: 0.3, w: 9.0, h: 0.6, fontFace: TITLE, fontSize: 28, color: NAVY, align: "left", valign: "middle" });
 }
 const source = (s, text) => T(s, text, { x: 0.5, y: 5.22, w: 8.4, h: 0.28, fontSize: 10, color: GREY });
-const card = (s, x, y, w, h, color) => s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.08, fill: { color: color || LT2 }, line: { color: color || LT2 } });
+const card = (s, x, y, w, h, color) => s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.14, fill: { color: color || LT2 }, line: { color: color || LT2 } });
 function badge(s, x, y, n, d) {
   d = d || 0.42;
   s.addShape(pres.shapes.OVAL, { x, y, w: d, h: d, fill: { color: ORANGE }, line: { color: ORANGE } });
@@ -165,7 +166,7 @@ header(s, "Version 2: pull grows with distance");
 ladder(s, [2, 3]);
 [["②", "v ← v + rand()·p_inc·(pbest − x) + rand()·g_inc·(gbest − x)", "far: strong pull · near: gentle pull", TEAL, LT2],
  ["③", "v ← v + 2·rand()·(pbest − x) + 2·rand()·(gbest − x)", "the 1995 PSO: mean pull 1, overshoots about half the time", TEAL, LT2],
- ["✕", "v ← 2·rand()·(pbest − x) + 2·rand()·(gbest − x)", "without the old v: \"quite ineffective at finding global optima\" → keep momentum", RED, "FBEDEA"]].forEach(([n, f, d, c, bg], i) => {
+ ["✕", "v ← 2·rand()·(pbest − x) + 2·rand()·(gbest − x)", "without the old v: \"quite ineffective at finding global optima\" → keep momentum", RED, "F6E3DA"]].forEach(([n, f, d, c, bg], i) => {
   const y = 1.7 + i * 1.02;
   card(s, 0.5, y, 9.0, 0.9, bg);
   T(s, n, { x: 0.65, y, w: 0.5, h: 0.9, fontSize: 20, bold: true, color: c, align: "center", valign: "middle" });
@@ -201,7 +202,7 @@ const rows5 = [["Symbol", "Meaning", "Range"],
   ["r₁, r₂", "random, new for each particle, coordinate and iteration", "U(0, 1)"],
   ["v_max", "speed limit per coordinate", "with ω: wide (domain width)"]];
 s.addTable(rows5.map((r, i) => r.map((c, j) => ({ text: c, options: {
-  bold: i === 0 || j === 0, color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 13, fontFace: BODY, valign: "middle", align: j === 1 ? "left" : "center" } }))),
+  bold: i === 0 || j === 0, color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? TEAL : WHITE }, fontSize: 13, fontFace: BODY, valign: "middle", align: j === 1 ? "left" : "center" } }))),
   { x: 0.5, y: 3.55, w: 9.0, colW: [1.1, 5.2, 2.7], rowH: 0.31, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
 source(s, "Poli, Kennedy & Blackwell (2007), Sects. 2.2–2.4; Shi & Eberhart (1998)");
 notes(s, 5);
@@ -218,7 +219,7 @@ const rows7 = [["Step", "P1", "P2 (gbest)"],
   ["f(x(1)) = x(1)²", "1.3225", "5.5225"]];
 s.addTable(rows7.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || j === 0 || i === 5, color: i === 0 ? WHITE : (i === 5 && j > 0 ? TEAL : NAVY),
-  fill: { color: i === 0 ? NAVY : (i === 5 ? LT2 : WHITE) }, fontSize: 14, fontFace: BODY,
+  fill: { color: i === 0 ? TEAL : (i === 5 ? LT2 : WHITE) }, fontSize: 14, fontFace: BODY,
   align: j === 0 ? "left" : "center", valign: "middle" } }))),
   { x: 0.5, y: 1.1, w: 6.1, colW: [2.3, 1.9, 1.9], rowH: 0.42, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.06 });
 {
@@ -278,7 +279,7 @@ const rows8 = [["P", "(x₁, x₂) iter 0", "f", "(x₁, x₂) iter 1", "f"],
 const better = { 3: true, 5: true };
 s.addTable(rows8.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || c.includes("★"), color: i === 0 ? WHITE : (j === 4 && i > 0 ? (better[i] ? TEAL : RED) : NAVY),
-  fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 13, fontFace: BODY, align: "center", valign: "middle" } }))),
+  fill: { color: i === 0 ? TEAL : WHITE }, fontSize: 13, fontFace: BODY, align: "center", valign: "middle" } }))),
   { x: 4.4, y: 1.1, w: 5.1, colW: [0.4, 1.35, 0.75, 1.5, 1.1], rowH: 0.36, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.03 });
 T(s, "Sphere, seed 42, ω = 0.7, c₁ = c₂ = 1.5. ★ = gbest", { x: 4.4, y: 3.33, w: 5.1, h: 0.28, fontSize: 12, color: GREY });
 T(s, "8.26 → 0.37", { x: 4.4, y: 3.7, w: 5.1, h: 0.55, fontSize: 30, bold: true, color: TEAL, valign: "middle" });
@@ -296,8 +297,8 @@ const rows9 = [["Mean final", "ω = 0.4", "ω = 0.7", "ω = 0.9"],
   ["Sphere", "8.8 × 10⁻³⁰", "1.0 × 10⁻¹²", "3.6 × 10⁻⁴"],
   ["Rastrigin", "≈ 0", "1.1 × 10⁻⁶", "0.164"]];
 s.addTable(rows9.map((r, i) => r.map((c, j) => ({ text: c, options: {
-  bold: i === 0 || j === 0 || (j === 1 && i > 0), color: i === 0 || (j === 1 && i > 0) ? WHITE : NAVY,
-  fill: { color: i === 0 ? NAVY : (j === 1 ? TEAL : WHITE) }, fontSize: 13, fontFace: BODY, align: "center", valign: "middle" } }))),
+  bold: i === 0 || j === 0 || (j === 1 && i > 0), color: i === 0 ? WHITE : NAVY,
+  fill: { color: i === 0 ? TEAL : (j === 1 ? "DCE8DF" : WHITE) }, fontSize: 13, fontFace: BODY, align: "center", valign: "middle" } }))),
   { x: 0.5, y: 4.0, w: 4.6, colW: [1.15, 1.15, 1.15, 1.15], rowH: 0.36, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.03 });
 T(s, [{ text: "Lower ω converged fastest here.", options: { bold: true, breakLine: true } },
   { text: "With a tighter v_max, one ω = 0.4 Rastrigin run stalls: the best ω depends on the other settings." }],
@@ -387,7 +388,7 @@ const rows6a = [["Particle", "x(0)", "v(0)", "r₁", "r₂", "f(x(0)) = x(0)²",
   ["P2", "−2", "−0.5", "0.8", "0.3", "(−2)² = 4  ★ gbest", "−2"]];
 s.addTable(rows6a.map((r, i) => r.map((c, j) => ({ text: c, options: {
   bold: i === 0 || j === 0 || (i === 2 && j === 5), color: i === 0 ? WHITE : (i === 2 && j === 5 ? ORANGE : NAVY),
-  fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
+  fill: { color: i === 0 ? TEAL : WHITE }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
   { x: 0.5, y: 1.55, w: 9.0, colW: [1.1, 1.0, 1.0, 0.9, 0.9, 2.6, 1.5], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
 {
   const X0 = 4.69, U = 1.2333, xl = (v) => X0 + v * U, LY = 3.55;
@@ -444,7 +445,7 @@ const rowsB2 = [["Variant", "Idea", "Source"],
   ["Diversity control", "variants designed against premature convergence on local optima", "Poli Sect. 4.5"],
   ["Bare-bones PSO", "no velocity: sample the new position around pbest and gbest", "Poli Sect. 4.6"]];
 s.addTable(rowsB2.map((r, i) => r.map((c, j) => ({ text: c, options: {
-  bold: i === 0 || j === 0, color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? NAVY : (j === 0 ? LT2 : WHITE) }, fontSize: 12, fontFace: BODY, valign: "middle" } }))),
+  bold: i === 0 || j === 0, color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? TEAL : (j === 0 ? LT2 : WHITE) }, fontSize: 12, fontFace: BODY, valign: "middle" } }))),
   { x: 0.5, y: 1.0, w: 9.0, colW: [1.8, 4.9, 2.3], rowH: [0.34, 0.6, 0.6, 0.6, 0.48, 0.48, 0.48], border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
 source(s, "Poli, Kennedy & Blackwell (2007)");
 s.addNotes("Backup for questions about PSO variants. Our team used only the gbest topology with a constant inertia weight.");
@@ -458,7 +459,7 @@ const rowsB3 = [["Rastrigin mean final", "ω = 0.4", "ω = 0.7", "ω = 0.9"],
   ["v_max = 10.24 (ours)", "0", "1.1 × 10⁻⁶", "0.164"],
   ["no clamp", "0", "9.6 × 10⁻⁹", "6.7 × 10⁻²"]];
 s.addTable(rowsB3.map((r, i) => r.map((c, j) => ({ text: c, options: {
-  bold: i === 0 || j === 0 || i === 3, color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? NAVY : (i === 3 ? LT2 : WHITE) }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
+  bold: i === 0 || j === 0 || i === 3, color: i === 0 ? WHITE : NAVY, fill: { color: i === 0 ? TEAL : (i === 3 ? LT2 : WHITE) }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
   { x: 0.5, y: 1.05, w: 9.0, colW: [2.4, 2.6, 2.0, 2.0], rowH: 0.45, border: { type: "solid", pt: 0.75, color: PALE } });
 T(s, [{ text: "Sphere: ", options: { bold: true } }, { text: "ranking ω = 0.4 < 0.7 < 0.9 holds for every limit. " },
   { text: "Rastrigin: ", options: { bold: true } }, { text: "with v_max ≤ 5.12 one ω = 0.4 run stalls, so ω = 0.7 is best; with 10.24 or no clamp all ω = 0.4 runs reach 0. Initial velocities are drawn from ±10.24 in every case." }],

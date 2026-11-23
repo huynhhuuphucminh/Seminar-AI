@@ -12,9 +12,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 
-NAVY, TEAL, ORANGE, RED, GREY, LIGHT = "#1B2A41", "#2E7D8C", "#F2A541", "#C8553D", "#5C6F82", "#8FB8C4"
+NAVY, TEAL, ORANGE, RED, GREY, LIGHT = "#33403A", "#3F6E5A", "#C8743A", "#B5523B", "#8A8073", "#A9BFAF"  # warm natural palette
 plt.rcParams.update({"font.family": "Calibri", "font.size": 12, "axes.edgecolor": GREY,
-                     "axes.labelcolor": NAVY, "xtick.color": GREY, "ytick.color": GREY})
+                     "axes.labelcolor": NAVY, "axes.facecolor": "none", "savefig.facecolor": "none", "xtick.color": GREY, "ytick.color": GREY})
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FIG = os.path.join(ROOT, "figs")
 
@@ -28,7 +28,7 @@ def sphere(x, y):
 
 
 def save(fig, name):
-    fig.savefig(os.path.join(FIG, name), dpi=200, bbox_inches="tight", transparent=False, facecolor="white")
+    fig.savefig(os.path.join(FIG, name), dpi=200, bbox_inches="tight", transparent=True)
     plt.close(fig)
 
 
@@ -105,7 +105,7 @@ def fig_functions():
     X, Y = np.meshgrid(g, g)
     for name, fn, lv in [("sphere", sphere, 12), ("rastrigin", rastrigin, 18)]:
         fig, ax = plt.subplots(figsize=(3.4, 3.0))
-        cs = ax.contourf(X, Y, fn(X, Y), levels=lv, cmap="cividis_r")
+        cs = ax.contourf(X, Y, fn(X, Y), levels=lv, cmap="YlGn_r")
         ax.scatter([0], [0], s=150, marker="*", color=ORANGE, edgecolor=NAVY, zorder=5)
         ax.set_aspect("equal"); ax.set_xticks([-5, 0, 5]); ax.set_yticks([-5, 0, 5])
         ax.set_xlabel("x₁"); ax.set_ylabel("x₂")
