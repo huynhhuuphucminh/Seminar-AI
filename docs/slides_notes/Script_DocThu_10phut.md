@@ -4,7 +4,7 @@
 
 ---
 
-## TV1: What PSO is and where it came from
+## TV1: The problem, PSO vs Hill Climbing, and the first rules
 
 ### Slide 0. Title
 
@@ -34,25 +34,25 @@ The update rule took several versions. `[click]` The first only checked directio
 
 `[click]` Next, the pull grew with distance, pbest minus x. `[click]` A factor 2 then gave the 1995 PSO.
 
-`[click]` When the authors removed the old velocity, the method became "quite ineffective at finding global optima", so momentum stays.
+`[click]` When the authors removed the old velocity, the method became "quite ineffective at finding global optima", so momentum stays. Minh will now take it to today's rule.
+
+---
+
+## TV2: The standard rule, a hand step, and the setup
 
 ### Slide 5. Version 3: speed limit, then inertia
 
-But the old velocity had full weight, so speeds grew without control.
+Thank you. In the 1995 rule the old velocity had full weight, so speeds grew without control.
 
 `[click]` The first fix was a speed limit, v max, which clips every velocity coordinate.
 
 `[click]` The lasting fix, by Shi and Eberhart, was the inertia weight omega. Together with coefficients c one, c two and fresh random numbers r one, r two, it gives today's standard rule.
 
-`[click]` A large omega keeps particles moving and explores; a small omega slows them down and refines. Minh will now show it with numbers.
-
----
-
-## TV2: How PSO runs
+`[click]` A large omega keeps particles moving and explores; a small omega slows them down and refines.
 
 ### Slide 6. One step by hand
 
-Thank you. Here is one update by hand, in one dimension, with fitness f of x equals x squared. Particle 2, at minus 2, is the global best.
+Here is one update by hand, in one dimension, with fitness f of x equals x squared. Particle 2, at minus 2, is the global best.
 
 `[click]` For particle 1 at 3, inertia gives 0.35, the cognitive term is zero, and the social pull is minus 4.5. So v is minus 4.15, and x becomes 3 minus 4.15, which is minus 1.15. Its fitness drops from 9 to 1.32.
 
@@ -64,25 +64,23 @@ Now the experiments. We use two functions with the minimum, zero, at the origin.
 
 `[click]` Sphere is unimodal, so it tests speed. `[click]` Rastrigin is multimodal, with a grid of local minima, so it tests trapping. Fitness is the function value at a particle's position.
 
-`[click]` We use omega 0.7, c one and c two equal to 1.5, and v max 10.24, the width of the domain. One run is 2,020 function evaluations, the same budget for every method, with five seeds.
+`[click]` We use omega 0.7, c one and c two equal to 1.5, and v max 10.24, the width of the domain. One run is 2,020 function evaluations, the same budget for every method, with five seeds. Trung will now show the results.
+
+---
+
+## TV3: Experiments and what they show
 
 ### Slide 8. Five particles: iteration 0 to 1
 
-Here are five particles on Sphere.
+Thank you. Here are five particles on Sphere.
 
 `[click]` At iteration 0, particle 1 is the best, with 8.26.
 
 `[click]` After one update, three particles get worse, and some are put back on the boundary. But particle 3 lands near the origin, so the swarm's best drops from 8.26 to 0.37 in one step.
 
-Trung will now compare many runs.
-
----
-
-## TV3: How well PSO works and when it fails
-
 ### Slide 9. How much inertia?
 
-Thank you. First, we changed only omega: 0.4, 0.7 and 0.9, with five seeds each.
+Next, we changed only omega: 0.4, 0.7 and 0.9, with five seeds each.
 
 `[click]` The plots show the best fitness at each iteration. The smallest omega converged fastest, and 0.9 was the slowest.
 
@@ -122,10 +120,10 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 
 | Người | Slide | Số từ | Nhanh | Chậm | Ước tính thật |
 |---|---|---|---|---|---|
-| TV1 | 0–5 | 327 | 2:31 | 2:58 | khoảng 3:34 |
-| TV2 | 6–8 | 220 | 1:42 | 2:00 | khoảng 2:24 |
-| TV3 | 9–12 | 246 | 1:54 | 2:14 | khoảng 2:41 |
-| **Tổng** | | **793** | **6:06** | **7:13** | **khoảng 8:39** |
+| TV1 | 0–4 | 254 | 1:57 | 2:19 | khoảng 2:46 |
+| TV2 | 5–7 | 247 | 1:54 | 2:15 | khoảng 2:42 |
+| TV3 | 8–12 | 296 | 2:17 | 2:41 | khoảng 3:14 |
+| **Tổng** | | **797** | **6:08** | **7:15** | **khoảng 8:42** |
 
 ## Thay đổi slide so với bản 15 phút
 
@@ -133,6 +131,7 @@ Tính theo số từ. Cột "nhanh" là 130 từ/phút, cột "chậm" là 110 t
 
 - **Ví dụ tính tay:** từ 2 slide còn 1 (slide "iteration 0 → 1", đã có dòng Start với x, v, r₁, r₂). Slide "iteration 0" chuyển xuống phần dự phòng. Không bỏ hẳn vì đề S01 Task 2 bắt buộc "Manually calculate one update step for two particles in a one-dimensional optimization problem".
 - **Còn 12 slide nội dung** (slide 1–12), đúng giới hạn 8–12 của đề.
+- **Chia lại người nói cho đều:** TV1 slide 0–4, TV2 slide 5–7 (công thức chuẩn, tính tay, setup), TV3 slide 8–12 (toàn bộ kết quả). Nhãn Member trên slide 5 và 8 đã đổi theo.
 - Chữ trên slide giữ nguyên; chỉ lời nói ngắn lại. Một số `[click]` được gộp (slide 7, 9, 12).
 - Tổng khoảng 8:40 theo ước tính, chừa khoảng 1:20 cho chuyển người nói và chỉ vào hình.
 

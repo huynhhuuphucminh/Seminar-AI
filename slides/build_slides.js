@@ -197,7 +197,7 @@ notes(s, 4);
 
 // ===================== Slide 5: version 3, speed limit then inertia weight =====================
 s = pres.addSlide({ masterName: "CONTENT" });
-header(s, "Version 3: speed limit, then inertia", "Member 1");
+header(s, "Version 3: speed limit, then inertia", "Member 2");
 ladder(s, 4);
 T(s, [{ text: "Problem: ", options: { bold: true, color: RED } },
   { text: "in the 1995 rule the old v has weight 1 and the pulls strength 2, so speeds grow without control." }],
@@ -308,7 +308,7 @@ notes(s, 7);
 
 // ===================== Slide 8: five particles =====================
 s = pres.addSlide({ masterName: "CONTENT" });
-header(s, "Five particles: iteration 0 → 1", "Member 2");
+header(s, "Five particles: iteration 0 → 1", "Member 3");
 s.addImage({ path: FIG("slide_swarm_step01.png"), x: 0.5, y: 1.0, w: 3.6, h: 4.15, altText: "Five particles on Sphere moving from iteration 0 to 1; particles 3 and 5 improve, gbest drops from 8.26 to 0.37" });
 const rows8 = [["P", "(x₁, x₂) iter 0", "f", "(x₁, x₂) iter 1", "f"],
   ["1", "(2.81, −0.63)", "8.26 ★", "(0.95, 5.12)", "27.12"],
