@@ -26,6 +26,6 @@ Each run used 2,020 objective evaluations on [−5.12, 5.12]² with seeds 0–4.
 
 Hill Climbing reached 0.01 sooner on Sphere, while PSO B kept improving and finished with the lowest mean. Only PSO B reached the threshold on Rastrigin. These results cover two 2-D functions and five seeds per method.
 
-**Figures 4.1 and 4.2.** Mean best-so-far fitness and min–max bands at common evaluation checkpoints. The Rastrigin plot displays values at or below 10⁻¹³ at that floor. [Sphere](figures/fig_compare_sphere.png) · [Rastrigin](figures/fig_compare_rastrigin.png)
+**Figures 4.1 and 4.2.** Mean best-so-far fitness and min–max bands at common evaluation checkpoints. The Rastrigin plot displays values at or below 10⁻¹³ at that floor. [Sphere](../../figs/fig_compare_sphere.png) · [Rastrigin](../../figs/fig_compare_rastrigin.png)
 
-Source for both tables and figures: team experiments in [Baseline_SoSanh.ipynb](Baseline_SoSanh.ipynb), using [TV2 PSO histories](../02_TV2_MoPhong/results_pso.csv) and [TV3 baseline histories](results_baseline.csv).
+Source for both tables and figures: team experiments in [Baseline_Comparison.ipynb](../../notebooks/Baseline_Comparison.ipynb), using [Member 2 PSO histories](../../results/results_pso.csv) and [Member 3 baseline histories](../../results/results_baseline.csv).

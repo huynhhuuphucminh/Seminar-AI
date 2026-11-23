@@ -1,8 +1,8 @@
-# TV1 presentation segment
+# Member 1 presentation segment
 
-> Bản nháp do AI (Claude) soạn theo prompt 4.1. TV1 tập nói theo speaker notes và bấm giờ; sửa lời cho tự nhiên với giọng của mình.
+> Written with AI assistance (prompt 4.1, see the AI-use log). Member 1 rehearses with the speaker notes, times the segment and adapts the wording. Numbers are from the first version (v_max = 2.0); the final deck is in slides/.
 
-Three content slides in about four and a half minutes, after the title slide. TV1 opens the talk.
+Three content slides in about four and a half minutes, after the title slide. Member 1 opens the talk.
 
 ## 1. Why PSO? · 1 min 20 s
 
@@ -11,7 +11,7 @@ Three content slides in about four and a half minutes, after the title slide. TV
 - PSO: many particles that share what they find
 - Guiding question: individual memory versus social information
 
-**Visual and credit.** Small sketch of a swarm moving towards a minimum on a contour plot; reuse iteration 0 and 5 panels of `02_TV2_MoPhong/figures/fig_swarm_sphere.png`. Credit: team experiment.
+**Visual and credit.** Small sketch of a swarm moving towards a minimum on a contour plot; reuse iteration 0 and 5 panels of `figs/fig_swarm_sphere.png`. Credit: team experiment.
 
 **Speaker notes.** Our topic is Particle Swarm Optimization. Many real problems, like tuning a model or building a schedule, come down to finding the input that gives the lowest value of some function. Often we have no gradient, and the function has many local minima. A simple local search can get stuck in the first valley it finds. PSO searches with a whole group of particles that share information. Our guiding question is how PSO mixes what each particle remembers with what the group knows, to balance exploring new regions and refining good ones.
 

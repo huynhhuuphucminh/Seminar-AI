@@ -6,9 +6,9 @@ We compared default PSO (ω = 0.7) with two baselines on Sphere and Rastrigin. R
 
 Each run received 2,020 objective evaluations, including initialization and rejected proposals. PSO used 20 evaluations per swarm batch. Figures 4.1 and 4.2 therefore compare best-so-far fitness after 20, 40, …, 2,020 evaluations. Table 4.1 reports the mean, sample standard deviation and range across seeds 0–4. Table 4.2 reports the first recorded fitness below 0.01. It separates the proportion of seeds reaching the target from the mean evaluation count among those seeds.
 
-> **Tables 4.1 and 4.2.** Insert the [final fitness and first-hit tables](BangSoSanh.md). Source: team experiments.
+> **Tables 4.1 and 4.2.** Insert the [final fitness and first-hit tables](comparison_tables.md). Source: team experiments.
 >
-> **Figures 4.1 and 4.2.** Best-so-far fitness on [Sphere](figures/fig_compare_sphere.png) and [Rastrigin](figures/fig_compare_rastrigin.png). Lines show the arithmetic mean and ribbons show the full observed range across five runs. The Rastrigin plot uses a display floor of 10⁻¹³ because of floating-point resolution. Source: team experiments.
+> **Figures 4.1 and 4.2.** Best-so-far fitness on [Sphere](../../figs/fig_compare_sphere.png) and [Rastrigin](../../figs/fig_compare_rastrigin.png). Lines show the arithmetic mean and ribbons show the full observed range across five runs. The Rastrigin plot uses a display floor of 10⁻¹³ because of floating-point resolution. Source: team experiments.
 
 On Sphere, Hill Climbing reached 0.01 in all five runs after a mean of 42.6 evaluations, compared with 132.0 evaluations for default PSO (Table 4.2). Hill Climbing's progress then slowed, while PSO continued improving (Figure 4.1). At the full budget, PSO averaged 1.795 × 10⁻¹³, compared with 2.602 × 10⁻⁴ for Hill Climbing and 1.397 × 10⁻² for Random Search (Table 4.1). A single local search was useful for rapid initial progress on the smooth objective. PSO was stronger when the goal was final accuracy under this budget.
 
@@ -16,7 +16,7 @@ On Rastrigin, default PSO reached 0.01 in all five runs, averaging 784 evaluatio
 
 ## 4.2 Sensitivity to inertia
 
-**Table 4.3. Mean final PSO fitness in the TV2 inertia sweep.** Each mean uses five seeds and 2,020 evaluations per run. The cognitive and social coefficients were held at 1.5. Source: team experiments. [TV2 inertia summary](../02_TV2_MoPhong/summary_pso.csv)
+**Table 4.3. Mean final PSO fitness in the Member 2 inertia sweep.** Each mean uses five seeds and 2,020 evaluations per run. The cognitive and social coefficients were held at 1.5. Source: team experiments. [Member 2 inertia summary](../../results/summary_pso.csv)
 
 | Function | A (ω = 0.4) | B (ω = 0.7) | C (ω = 0.9) |
 |---|---:|---:|---:|
@@ -31,7 +31,7 @@ In a separate Rastrigin diagnostic, we ran five particles with ω = 0.4, c₁ = 
 
 The strong pull toward gbest, weak momentum and small population are plausible contributors to the rapid collapse in diversity seen in Figure 4.3. The diagnostic changes several settings together and uses 505 evaluations compared with 2,020 for the default run. It shows how a swarm can converge tightly around a suboptimal basin without estimating how much each parameter contributed.
 
-> **Figure 4.3.** Rastrigin contours at iterations 0, 10, 50 and 100, with fitness and diversity traces for the diagnostic and default runs. Source: team experiments. [Figure](figures/fig_local_optimum.png) · [Analysis](PhanTichKetCucTri.md)
+> **Figure 4.3.** Rastrigin contours at iterations 0, 10, 50 and 100, with fitness and diversity traces for the diagnostic and default runs. Source: team experiments. [Figure](../../figs/fig_local_optimum.png) · [Analysis](local_optimum_analysis.md)
 
 ## 4.4 Applications and scope
 
@@ -53,5 +53,5 @@ A controlled follow-up could vary population size and the acceleration coefficie
 
 - Alshareef, M., Lin, Z., Ma, M., & Cao, W. (2019). Accelerated particle swarm optimization for photovoltaic maximum power point tracking under partial shading conditions. *Energies, 12*(4), 623. [DOI](https://doi.org/10.3390/en12040623)
 - Phung, M. D., & Ha, Q. P. (2021). Safety-enhanced UAV path planning with spherical vector-based particle swarm optimization. *Applied Soft Computing, 107*, 107376. [DOI](https://doi.org/10.1016/j.asoc.2021.107376)
-- TV2 and TV3, CS420 Seminar S01 (2026). [PSO histories](../02_TV2_MoPhong/results_pso.csv), [baseline histories](results_baseline.csv), and [comparison notebook](Baseline_SoSanh.ipynb). Team-generated data and analysis.
-- OpenAI Codex assisted with experiment implementation, analysis and drafting. [TV3 AI log](../NhatKyAI/TV3.md)
+- Member 2 and Member 3, CS420 Seminar S01 (2026). [PSO histories](../../results/results_pso.csv), [baseline histories](../../results/results_baseline.csv), and [comparison notebook](../../notebooks/Baseline_Comparison.ipynb). Team-generated data and analysis.
+- OpenAI Codex assisted with experiment implementation, analysis and drafting. [Member 3 AI log](../ai_log/member3.md)

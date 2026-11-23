@@ -1,6 +1,5 @@
 <!--
-Trạng thái: bản nháp do AI (Claude) viết theo prompt 1.6. Mọi con số lấy từ summary_pso.csv (TV2) và BangSoSanh.md (TV3), đã đối chiếu với CSV.
-TV1 cần đọc lại và viết lại bằng lời của mình. Abstract: 198 từ (giới hạn 200).
+Status: early draft written with AI assistance (prompt 1.6, see the AI-use log). Numbers taken from summary_pso.csv (Member 2) and comparison_tables.md (Member 3) of the first version (v_max = 2.0) and checked against the CSV files. The submitted report (Report.pdf) supersedes this draft. Abstract: 198 words (limit 200).
 -->
 
 # Abstract

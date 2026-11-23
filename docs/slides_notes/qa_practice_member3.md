@@ -1,4 +1,4 @@
-# TV3 Q&A practice
+# Member 3 Q&A practice
 
 Answer one question aloud before reading its model answer. Rehearse twice, using questions from another member’s section in the second round.
 
@@ -11,4 +11,4 @@ Answer one question aloud before reading its model answer. Rehearse twice, using
 7. **Why does the best inertia change across the two functions?** Sphere has one basin, and ω = 0.4 gave the best mean there. On Rastrigin, one run under ω = 0.4 stalled near 0.995, while all five runs at ω = 0.7 got close to zero. We would tune inertia on the new objective.
 8. **What happens to the velocity update when diversity collapses?** If particle positions approach their personal and shared bests, the two attraction displacements shrink. The inertia term then carries forward a fraction of the previous velocity. This can leave little motion to explore other basins.
 
-Evidence for rehearsal is in the [comparison tables](../03_TV3_ThucNghiem/BangSoSanh.md) and [local-optimum analysis](../03_TV3_ThucNghiem/PhanTichKetCucTri.md).
+Evidence for rehearsal is in the [comparison tables](../drafts/comparison_tables.md) and [local-optimum analysis](../drafts/local_optimum_analysis.md).

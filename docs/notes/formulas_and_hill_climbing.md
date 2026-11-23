@@ -1,13 +1,13 @@
-# Công thức, ký hiệu và so sánh PSO với Hill Climbing
+# Formulas, symbols and comparison of PSO with Hill Climbing
 
-> **Trạng thái: BẢN NHÁP do AI (Claude) soạn theo prompt 1.4.** Bảng ký hiệu, mã giả và bảng so sánh viết bằng tiếng Anh để đưa vào báo cáo; phần ghi chú viết tiếng Việt. Giá trị trong bảng ký hiệu khớp bảng thông số chung. Bảng ký hiệu đầy đủ đã được đưa vào phần Method (Bảng 3.1), nên khi ghép báo cáo không lặp lại ở Background.
+> **Status:** drafted with AI assistance (prompt 1.4, see the AI-use log). The full symbol table went into the Method section of the report. **Values are those of the first version (v_max = 2.0)**; the submitted report uses v_max = 10.24, so velocities lie in [−10.24, 10.24] and the PSO first-hit count on Sphere is 216 evaluations (Report, Tables 1 and 5).
 
-## 1. Symbols (English, for the report)
+## 1. Symbols
 
 | Symbol | Meaning | Range or unit | Value used by the team |
 |---|---|---|---|
 | x_i(t) | Position of particle i at iteration t (a candidate solution) | point in the search domain | [−5.12, 5.12]² |
-| v_i(t) | Velocity of particle i (step added to the position) | same unit as x | each component in [−2.0, 2.0] |
+| v_i(t) | Velocity of particle i (step added to the position) | same unit as x | each component in [−2.0, 2.0] (final report: [−10.24, 10.24]) |
 | pbest_i | Best position visited by particle i so far | point in the domain | updated when f improves |
 | gbest | Best position found by the whole swarm so far | point in the domain | updated every iteration |
 | ω | Inertia weight | usually 0.4 to 0.9 | 0.4, 0.7, 0.9 |
@@ -28,9 +28,9 @@ v_i(t+1) = **ω v_i(t)** + **c₁ r₁ (pbest_i − x_i(t))** + **c₂ r₂ (gbe
 | Cognitive c₁ r₁ (pbest_i − x_i) | Pull towards the particle's own best memory | Keeps particles searching around regions they found good; preserves diversity because each particle has its own pbest |
 | Social c₂ r₂ (gbest − x_i) | Pull towards the swarm's best | Spreads good information and concentrates the swarm (**exploitation**); if too strong, the swarm collapses early onto one basin |
 
-**Ghi chú (VI):** Kennedy & Eberhart (1995, tr. 1945) đã quan sát: g_increment quá lớn làm đàn "lao sớm vào cực tiểu địa phương", p_increment quá lớn làm từng cá thể lang thang; hai giá trị xấp xỉ nhau cho tìm kiếm tốt nhất. Đây là lý do nhóm đặt c₁ = c₂. Poli et al. (2007, Mục 2.3) diễn giải 1 − ω như hệ số ma sát.
+**Note.** Kennedy & Eberhart (1995, p. 1945) observed that a much larger g_increment makes the flock "rush prematurely towards local minima" and a much larger p_increment makes individuals wander; roughly equal values gave the best search. This is why the team sets c₁ = c₂. Poli et al. (2007, Sect. 2.3) interpret 1 − ω as a friction coefficient.
 
-## 3. Pseudo-code (English, for the report)
+## 3. Pseudo-code
 
 ```
 Input: objective f, domain [lo, hi]^n, N, T, ω, c1, c2, vmax
@@ -50,9 +50,9 @@ Input: objective f, domain [lo, hi]^n, N, T, ω, c1, c2, vmax
 14 return gbest, f(gbest)
 ```
 
-**Ghi chú (VI):** dòng 13 nằm ngoài vòng lặp hạt, nghĩa là cả bầy dùng chung gbest của vòng trước trong suốt một vòng (cập nhật đồng bộ). Code của TV2 làm đúng như vậy.
+**Note.** Line 13 is outside the particle loop, so the whole swarm uses the previous iteration's gbest during one iteration (synchronous update). The notebook implements exactly this.
 
-## 4. PSO versus Hill Climbing (English, for the report)
+## 4. PSO versus Hill Climbing
 
 | Criterion | Hill Climbing | PSO |
 |---|---|---|
@@ -65,14 +65,14 @@ Input: objective f, domain [lo, hi]^n, N, T, ω, c1, c2, vmax
 | Typical strength | Fast early progress on smooth, single-basin functions | Better final accuracy and robustness on multimodal functions under the same budget |
 | When to use | Cheap local refinement, good starting point known | Global search, no gradient, landscape with many local optima |
 
-**Ghi chú (VI):** dòng "Typical strength" khớp với kết quả TV3 (Bảng 4.1, 4.2): Hill Climbing đạt ngưỡng 0.01 trên Sphere nhanh hơn PSO (42.6 so với 132 lần đánh giá) nhưng PSO cho kết quả cuối tốt hơn, và trên Rastrigin chỉ PSO đạt ngưỡng.
+**Note.** The "Typical strength" row matches the comparison results: Hill Climbing reaches 0.01 on Sphere sooner than PSO (42.6 against 216 evaluations in the final report; 132 with v_max = 2.0) but PSO ends with the better final value, and on Rastrigin only PSO reaches the threshold.
 
-## 5. Applications (với nguồn)
+## 5. Applications (with sources)
 
-Lấy từ Poli et al. (2007, Mục 6, tr. 50–51), không cần nguồn ngoài:
+From Poli et al. (2007, Sect. 6, pp. 50–51), no external source needed:
 
 - **Scheduling:** 38 application papers (5.6%) in the authors' analysis of IEEE Xplore.
 - **Neural networks** (training and design, which includes tuning a network's hyper-parameters): 26 papers (3.8%). Kennedy & Eberhart (1995) already trained neural-network weights with PSO (XOR, Iris).
 - **Electricity networks and load dispatching:** 48 papers (7.1%), the second-largest category.
 
-Mục 4.4 của báo cáo dùng thêm hai nguồn ngoài: Alshareef et al. (2019) cho theo dõi điểm công suất cực đại của pin mặt trời, và Phung & Ha (2021) cho lập đường bay UAV. Theo cách phân loại của nhóm, hai nguồn này nằm trong nhóm điện/năng lượng và điều khiển/robot của danh mục trên (bài Poli không nhắc tới hai bài này). Một thành viên cần tự mở ra đọc lại.
+Section 4.4 of the report adds two external sources: Alshareef et al. (2019) for photovoltaic maximum power point tracking and Phung & Ha (2021) for UAV path planning. In the team's reading they belong to the power/energy and control/robotics categories above; the Poli paper does not mention them.
