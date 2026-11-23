@@ -285,6 +285,8 @@ s.addTable(rows7.map((r, i) => r.map((c, j) => ({ text: c, options: {
 {
   const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.6;
   T(s, [{ text: "Fitness = f(x) = x²", options: { bold: true, color: TEAL } }, { text: ", lower is better" }], { x: 6.6, y: 1.15, w: 2.9, h: 0.3, fontSize: 12.5, fontFace: HEAD });
+  T(s, [{ text: "Start: ", options: { bold: true } }, { text: "P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6", options: { breakLine: true } },
+    { text: "P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3" }], { x: 6.6, y: 1.45, w: 2.9, h: 0.42, fontSize: 10.5, color: DK2 });
   s.addShape(pres.shapes.LINE, { x: 6.6, y: LY, w: 2.9, h: 0, line: { color: GREY, width: 1.25 } });
   [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
     s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.05, w: 0, h: 0.1, line: { color: GREY, width: 1 } });
