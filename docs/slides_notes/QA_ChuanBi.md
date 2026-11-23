@@ -129,7 +129,8 @@
 - Say: *Seed 0 ended near (0, −0.995) with fitness 0.995, while the global minimum is 0, and we verified that point is a local minimum of Rastrigin. The swarm's spread fell from 4.18 to about 3 × 10⁻⁹, so all particles collapsed onto that one point.*
 
 **C10. Thí nghiệm bị kẹt có chứng minh c₂ lớn gây kẹt không?** *(TV3, slide 12)*
-- Ý chính: không. Nó đổi cùng lúc ω, c₁, c₂ và số hạt, và chỉ dùng 505 lượt so với 2,020 của bản mặc định. Nó chỉ minh họa cách đàn mất đa dạng. Muốn tách nguyên nhân phải thay từng tham số một.
+- Lưu ý: đây là thí nghiệm **riêng** ở slide 12, khác thí nghiệm ω ở slide 10. Thí nghiệm ω chỉ đổi ω (0.4, 0.7, 0.9), giữ c₁ = c₂ = 1.5 và 20 hạt. Thí nghiệm bị kẹt dùng 5 hạt, ω = 0.4, c₁ = 0.5, c₂ = 2.5, seed 0–19, và được so với bản mặc định (ω = 0.7, c₁ = c₂ = 1.5, 20 hạt).
+- Ý chính: không. So với bản mặc định, nó đổi cùng lúc ω, c₁, c₂ và số hạt, và chỉ dùng 505 lượt so với 2,020. Nó chỉ minh họa cách đàn mất đa dạng. Muốn tách nguyên nhân phải thay từng tham số một.
 - Say: *No. The diagnostic changes ω, c₁, c₂ and the number of particles at once, and uses 505 evaluations against 2,020. It shows how a swarm can collapse, but a controlled sweep that changes one factor at a time would be needed to name the cause.*
 
 ---
