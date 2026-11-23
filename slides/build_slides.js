@@ -1,5 +1,6 @@
 // Builds slides/Slide_Seminar_PSO.pptx (plan: docs/slides_notes/DanYSlide_V3_Opus.md).
-// Speaker notes are read from docs/slides_notes/Script_DocThu_V3.md.
+// Speaker notes are read from docs/slides_notes/Script_DocThu_10phut.md (10-minute version;
+// Script_DocThu_V3.md is the earlier 15-minute version).
 // Usage (from the repository root):
 //   PPTXGENJS=<path to node_modules/pptxgenjs> node slides/build_slides.js [output.pptx]
 // After building, remove the ZIP folder entries JSZip writes (they break cloud co-editing):
@@ -19,7 +20,7 @@ const NAVY = "1B2A41", DK2 = "324A5F", LT2 = "EEF3F6", TEAL = "2E7D8C", ORANGE =
 const HEAD = "Cambria", BODY = "Calibri", MONO = "Courier New";
 
 // ---------- speaker notes from the read-through script ----------
-const script = fs.readFileSync(path.join(ROOT, "docs", "slides_notes", "Script_DocThu_V3.md"), "utf8")
+const script = fs.readFileSync(path.join(ROOT, "docs", "slides_notes", "Script_DocThu_10phut.md"), "utf8")
   .split("## Thời gian ước tính")[0];
 const NOTES = {};
 script.split(/^### Slide (\d+[a-z]?)\.[^\n]*$/m).forEach((chunk, i, arr) => {
@@ -236,38 +237,7 @@ T(s, [{ text: "Large ω explores, small ω refines\n", options: { bold: true, co
 source(s, "v_max: Poli, Kennedy & Blackwell (2007), Sects. 2.2, 2.4; ω: Shi & Eberhart (1998), via Poli et al., Sect. 2.3");
 notes(s, 5);
 
-// ===================== Slide 6: one step by hand, iteration 0 =====================
-s = pres.addSlide({ masterName: "CONTENT" });
-header(s, "One step by hand: iteration 0", "Member 2");
-T(s, [{ text: "Fitness = f(x) = x²", options: { bold: true, color: TEAL } }, { text: " (lower is better),  one dimension,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit" }], { x: 0.5, y: 1.05, w: 9.0, h: 0.35, fontSize: 15, fontFace: HEAD });
-const rows6a = [["Particle", "x(0)", "v(0)", "r₁", "r₂", "f(x(0)) = x(0)²", "pbest"],
-  ["P1", "3", "0.5", "0.4", "0.6", "3² = 9", "3"],
-  ["P2", "−2", "−0.5", "0.8", "0.3", "(−2)² = 4  ★ gbest", "−2"]];
-s.addTable(rows6a.map((r, i) => r.map((c, j) => ({ text: c, options: {
-  bold: i === 0 || j === 0 || (i === 2 && j === 5), color: i === 0 ? WHITE : (i === 2 && j === 5 ? ORANGE : NAVY),
-  fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
-  { x: 0.5, y: 1.55, w: 9.0, colW: [1.1, 1.0, 1.0, 0.9, 0.9, 2.6, 1.5], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
-{
-  const X0 = 4.69, U = 1.2333, xl = (v) => X0 + v * U, LY = 3.55;
-  s.addShape(pres.shapes.LINE, { x: 1.0, y: LY, w: 8.0, h: 0, line: { color: GREY, width: 1.25 } });
-  [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
-    s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.06, w: 0, h: 0.12, line: { color: GREY, width: 1 } });
-    T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.3, y: LY + 0.1, w: 0.6, h: 0.25, fontSize: 11, color: GREY, align: "center" });
-  });
-  T(s, "optimum", { x: xl(0) - 0.5, y: LY + 0.32, w: 1.0, h: 0.22, fontSize: 10, italic: true, color: GREY, align: "center" });
-  s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.1, y: LY - 0.1, w: 0.2, h: 0.2, fill: { color: TEAL }, line: { color: TEAL } });
-  s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.1, y: LY - 0.1, w: 0.2, h: 0.2, fill: { color: ORANGE }, line: { color: ORANGE } });
-  T(s, "P1: x = 3, f = 9", { x: xl(3) - 1.2, y: LY - 0.5, w: 1.6, h: 0.28, fontSize: 13, bold: true, color: TEAL, align: "center" });
-  T(s, "P2 = gbest: x = −2, f = 4", { x: xl(-2) - 1.2, y: LY - 0.5, w: 2.4, h: 0.28, fontSize: 13, bold: true, color: ORANGE, align: "center" });
-}
-card(s, 0.5, 4.38, 9.0, 0.72);
-T(s, [{ text: "At the start, pbest = x for every particle, ", options: { bold: true } },
-  { text: "so the cognitive term c₁r₁(pbest − x) will be 0 in the first update." }],
-  { x: 0.7, y: 4.42, w: 8.6, h: 0.64, fontSize: 15, valign: "middle" });
-source(s, "Team worked example (report Table 2)");
-notes(s, 6);
-
-// ===================== Slide 6b: one step by hand, iteration 0 -> 1 =====================
+// ===================== Slide 6: one step by hand, iteration 0 -> 1 =====================
 s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "One step by hand: iteration 0 → 1", "Member 2");
 const rows7 = [["Step", "P1", "P2 (gbest)"],
@@ -283,10 +253,11 @@ s.addTable(rows7.map((r, i) => r.map((c, j) => ({ text: c, options: {
   align: j === 0 ? "left" : "center", valign: "middle" } }))),
   { x: 0.5, y: 1.1, w: 5.9, colW: [2.1, 1.9, 1.9], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
 {
-  const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.6;
+  const X0 = 8.0, U = 0.42, xl = (v) => X0 + v * U, LY = 2.8;
   T(s, [{ text: "Fitness = f(x) = x²", options: { bold: true, color: TEAL } }, { text: ", lower is better" }], { x: 6.6, y: 1.15, w: 2.9, h: 0.3, fontSize: 12.5, fontFace: HEAD });
-  T(s, [{ text: "Start: ", options: { bold: true } }, { text: "P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6", options: { breakLine: true } },
-    { text: "P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3" }], { x: 6.6, y: 1.45, w: 2.9, h: 0.42, fontSize: 10.5, color: DK2 });
+  T(s, [{ text: "ω = 0.7, c₁ = c₂ = 1.5, no velocity limit", options: { breakLine: true } },
+    { text: "Start: ", options: { bold: true } }, { text: "P1: x = 3, v = 0.5, r₁ = 0.4, r₂ = 0.6", options: { breakLine: true } },
+    { text: "P2: x = −2, v = −0.5, r₁ = 0.8, r₂ = 0.3" }], { x: 6.6, y: 1.45, w: 2.9, h: 0.6, fontSize: 10.5, color: DK2 });
   s.addShape(pres.shapes.LINE, { x: 6.6, y: LY, w: 2.9, h: 0, line: { color: GREY, width: 1.25 } });
   [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
     s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.05, w: 0, h: 0.1, line: { color: GREY, width: 1 } });
@@ -305,7 +276,7 @@ T(s, [{ text: "One particle gets worse, yet the swarm gets better: ", options: {
   { text: "gbest moves from −2 to −1.15 (f 4 → 1.32)." }],
   { x: 0.7, y: 4.42, w: 8.6, h: 0.64, fontSize: 15, valign: "middle" });
 source(s, "Team worked example (report Table 2)");
-notes(s, "6b");
+notes(s, 6);
 
 // ===================== Slide 7: setup =====================
 s = pres.addSlide({ masterName: "CONTENT" });
@@ -461,8 +432,39 @@ const refs = [
 ];
 T(s, refs.map((r, i) => ({ text: r, options: { breakLine: i < refs.length - 1 } })), { x: 0.7, y: 1.45, w: 8.6, h: 2.6, fontSize: 13, color: LIGHT, paraSpaceAfter: 6 });
 T(s, "AI tools (Claude, OpenAI Codex) assisted with code, drafting and slides; all numbers were checked by the team against the notebooks.", { x: 0.7, y: 4.25, w: 8.6, h: 0.5, fontSize: 13, color: ORANGE });
-T(s, "Backup slides: B1 pseudo-code · B2 variants · B3 v_max sensitivity · B4 fair comparison", { x: 0.7, y: 4.85, w: 8.6, h: 0.3, fontSize: 11, italic: true, color: LIGHT });
+T(s, "Backup slides: B0 hand example, iteration 0 · B1 pseudo-code · B2 variants · B3 v_max sensitivity · B4 fair comparison", { x: 0.7, y: 4.85, w: 8.6, h: 0.3, fontSize: 11, italic: true, color: LIGHT });
 s.addNotes("Take questions. Backup slides B1 to B4 follow.");
+
+// ===================== Backup B0: hand example, iteration 0 =====================
+s = pres.addSlide({ masterName: "CONTENT" });
+header(s, "B0. Hand example: iteration 0", "Backup");
+T(s, [{ text: "Fitness = f(x) = x²", options: { bold: true, color: TEAL } }, { text: " (lower is better),  one dimension,  ω = 0.7,  c₁ = c₂ = 1.5,  no velocity limit" }], { x: 0.5, y: 1.05, w: 9.0, h: 0.35, fontSize: 15, fontFace: HEAD });
+const rows6a = [["Particle", "x(0)", "v(0)", "r₁", "r₂", "f(x(0)) = x(0)²", "pbest"],
+  ["P1", "3", "0.5", "0.4", "0.6", "3² = 9", "3"],
+  ["P2", "−2", "−0.5", "0.8", "0.3", "(−2)² = 4  ★ gbest", "−2"]];
+s.addTable(rows6a.map((r, i) => r.map((c, j) => ({ text: c, options: {
+  bold: i === 0 || j === 0 || (i === 2 && j === 5), color: i === 0 ? WHITE : (i === 2 && j === 5 ? ORANGE : NAVY),
+  fill: { color: i === 0 ? NAVY : WHITE }, fontSize: 14, fontFace: BODY, align: "center", valign: "middle" } }))),
+  { x: 0.5, y: 1.55, w: 9.0, colW: [1.1, 1.0, 1.0, 0.9, 0.9, 2.6, 1.5], rowH: 0.4, border: { type: "solid", pt: 0.75, color: PALE }, margin: 0.05 });
+{
+  const X0 = 4.69, U = 1.2333, xl = (v) => X0 + v * U, LY = 3.55;
+  s.addShape(pres.shapes.LINE, { x: 1.0, y: LY, w: 8.0, h: 0, line: { color: GREY, width: 1.25 } });
+  [-3, -2, -1, 0, 1, 2, 3].forEach((v) => {
+    s.addShape(pres.shapes.LINE, { x: xl(v), y: LY - 0.06, w: 0, h: 0.12, line: { color: GREY, width: 1 } });
+    T(s, v < 0 ? "−" + -v : String(v), { x: xl(v) - 0.3, y: LY + 0.1, w: 0.6, h: 0.25, fontSize: 11, color: GREY, align: "center" });
+  });
+  T(s, "optimum", { x: xl(0) - 0.5, y: LY + 0.32, w: 1.0, h: 0.22, fontSize: 10, italic: true, color: GREY, align: "center" });
+  s.addShape(pres.shapes.OVAL, { x: xl(3) - 0.1, y: LY - 0.1, w: 0.2, h: 0.2, fill: { color: TEAL }, line: { color: TEAL } });
+  s.addShape(pres.shapes.OVAL, { x: xl(-2) - 0.1, y: LY - 0.1, w: 0.2, h: 0.2, fill: { color: ORANGE }, line: { color: ORANGE } });
+  T(s, "P1: x = 3, f = 9", { x: xl(3) - 1.2, y: LY - 0.5, w: 1.6, h: 0.28, fontSize: 13, bold: true, color: TEAL, align: "center" });
+  T(s, "P2 = gbest: x = −2, f = 4", { x: xl(-2) - 1.2, y: LY - 0.5, w: 2.4, h: 0.28, fontSize: 13, bold: true, color: ORANGE, align: "center" });
+}
+card(s, 0.5, 4.38, 9.0, 0.72);
+T(s, [{ text: "At the start, pbest = x for every particle, ", options: { bold: true } },
+  { text: "so the cognitive term c₁r₁(pbest − x) will be 0 in the first update." }],
+  { x: 0.7, y: 4.42, w: 8.6, h: 0.64, fontSize: 15, valign: "middle" });
+source(s, "Team worked example (report Table 2)");
+s.addNotes("Backup for: where do the starting values of the hand example come from? Same numbers as the Start line on the hand-example slide and report Table 2.");
 
 // ===================== Backup B1: pseudo-code =====================
 s = pres.addSlide({ masterName: "CONTENT" });
