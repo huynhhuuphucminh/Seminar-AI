@@ -139,10 +139,11 @@ s = pres.addSlide({ masterName: "CONTENT" });
 header(s, "Version 1: push by direction only");
 ladder(s, 1);
 card(s, 0.5, 1.7, 5.3, 1.6);
-T(s, [{ text: "if x > best:  ", options: { color: TEAL, bold: true } }, { text: "v ← v − rand()·inc", options: { breakLine: true } },
-  { text: "if x < best:  ", options: { color: TEAL, bold: true } }, { text: "v ← v + rand()·inc" }],
-  { x: 0.7, y: 1.85, w: 5.0, h: 0.8, fontFace: MONO, fontSize: 15, paraSpaceAfter: 4 });
-T(s, "best = pbest (with p_inc) or gbest (with g_inc), per coordinate", { x: 0.7, y: 2.75, w: 5.0, h: 0.45, fontSize: 14, color: DK2 });
+T(s, [["if x > pbest: ", "v ← v − rand()·p_inc", TEAL], ["if x < pbest: ", "v ← v + rand()·p_inc", TEAL],
+  ["if x > gbest: ", "v ← v − rand()·g_inc", RED], ["if x < gbest: ", "v ← v + rand()·g_inc", RED]].flatMap(([a, b, c], i) => [
+  { text: a, options: { color: c, bold: true } }, { text: b, options: { breakLine: i < 3 } }]),
+  { x: 0.7, y: 1.8, w: 5.0, h: 1.12, fontFace: MONO, fontSize: 14 });
+T(s, "p_inc, g_inc: step sizes set by the experimenter", { x: 0.7, y: 2.95, w: 5.0, h: 0.3, fontSize: 13, color: DK2 });
 // 1-D diagram: same push near or far
 T(s, "Near or far: same push", { x: 6.1, y: 1.72, w: 3.4, h: 0.32, fontSize: 16, bold: true, align: "center" });
 s.addShape(pres.shapes.LINE, { x: 6.2, y: 2.8, w: 3.2, h: 0, line: { color: GREY, width: 1.25 } });
